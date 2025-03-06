@@ -12,8 +12,8 @@ export const Login = () => {
   const handleLogin = async () => {
     try {
       const valasz = await axios.post("https://szallasjwt.sulla.hu/login", {
-        Username,
-        Password,
+        username,
+        password,
       });
       const token = valasz.data.token;
       localStorage.setItem("jwt", token);

@@ -6,8 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return(
-    <html>
-      <body>
+    <>
       <Navbar bg="dark" expand="lg"
       variant="dark"
       className="container-fluid">
@@ -216,8 +215,8 @@ function App() {
                     <p className="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
                 </div>
             </footer>
-      </body>
-    </html>
+     
+    </>
     
   );
 }
