@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const ProductList = () =>
-{
+const ProductList = () => {
     const [productsData, setProductsData] = useState([]);
 
-    useEffect(() =>
-    {
-        const fetchData = async () =>
-        {
-            try
-            {
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
                 const response = await axios.get('https://localhost:7012/api/Products')
                 setProductsData(response.data.result);
-            } catch (error)
-            {
+            } catch (error) {
                 console.error("Hiba az adatok leklérésekor: ", error);
             }
         };
@@ -38,7 +33,6 @@ const ProductList = () =>
                                     {product.name} - {product.price} Ft.
                                 </p>
                                 <div className="d-flex justify-content-between align-items-center">
-                                    {/* Ide lehet gombokat vagy egyéb funkciókat tenni */}
                                 </div>
                             </div>
                         </div>

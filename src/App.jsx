@@ -5,8 +5,7 @@ import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Production from './components/Production'
 
-function App()
-{
+function App() {
     return (
         <>
             <Navbar bg="dark" expand="lg"
@@ -22,40 +21,34 @@ function App()
                 <Navbar.Collapse
                     id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Link href="#registration">
+                        <Nav.Link className='topnav-centered' href="#registration">
                             Regisztráció
                         </Nav.Link>
                         <Nav.Link href="#login">
                             <form>
                                 <div className="form-row align-items-center">
-                                    <div className="col-auto">
-                                        <label className="sr-only" htmlFor="inlineFormInput">Felhasználónév</label>
-                                        <input type="text" className="form-control" id="inlineFormInput" placeholder="Username" />
-                                    </div>
-                                    <div className="col-auto">
-                                        <label className="sr-only" htmlFor="inlineFormInputGroup">Jelszó</label>
-                                        <div className="input-group sm-1">
-                                            <div className="input-group-prepend">
+                                    <div className='container-fluid'>
+                                        <div className='row'>
+                                            <div className="col-auto">
+                                                {/* <label className="sr-only" htmlFor="inlineFormInput">Felhasználónév</label> */}
+                                                <input type="text" className="form-control" id="inlineFormInput" placeholder="Felhasználónév" />
                                             </div>
-                                            <input type="password" className="form-control" id="inlineFormInputGroup" placeholder="Password" />
+                                            <div className="col-auto">
+                                                {/* <label className="sr-only" htmlFor="inlineFormInputGroup">Jelszó</label> */}
+                                                <div className="input-group-prepend">
+                                                </div>
+                                                <input type="password" className="form-control" id="inlineFormInputGroup" placeholder="Jelszó" />
+                                            </div>
+                                            <div className="col-auto">
+                                                <button type="submit" className="btn btn-primary mb-2">Bejelentkezés</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-auto">
-                                        <div className="form-check sm-1">
-                                            <input className="form-check-input" type="checkbox" id="autoSizingCheck" />
-                                            <label className="form-check-label" htmlFor="autoSizingCheck">
-                                                Emlékezz rá
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div className="col-auto">
-                                        <button type="submit" className="btn btn-primary mb-2">Bejelentkezés</button>
                                     </div>
                                 </div>
                             </form>
                             {/* Bejelentkezés */}
                         </Nav.Link>
-                        <Nav.Link href="#shoppingBasket">
+                        <Nav.Link className='topnav-centered' href="#shoppingBasket">
                             <img src={basket} width="40" height="40" alt="basket" />
                             {/* Kosár */}
                         </Nav.Link>
