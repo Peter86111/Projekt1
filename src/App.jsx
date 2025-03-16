@@ -1,5 +1,6 @@
 import logo from './mr_q_mod.png';
 import basket from './cart.svg';
+import kando from './kando.jpg';
 import { Navbar, Nav } from 'react-bootstrap';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,7 +22,7 @@ function App() {
                 <Navbar.Collapse
                     id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Link className='topnav-centered' href="#registration">
+                        <Nav.Link className='topnav-registration' href="#registration">
                             Regisztráció
                         </Nav.Link>
                         <Nav.Link href="#login">
@@ -48,7 +49,7 @@ function App() {
                             </form>
                             {/* Bejelentkezés */}
                         </Nav.Link>
-                        <Nav.Link className='topnav-centered' href="#shoppingBasket">
+                        <Nav.Link className='topnav-basket' href="#shoppingBasket">
                             <img src={basket} width="40" height="40" alt="basket" />
                             {/* Kosár */}
                         </Nav.Link>
@@ -62,17 +63,44 @@ function App() {
                 </div>
             </div>
 
-            <footer className="text-body-secondary py-5 bg-dark shadow-sm">
-                <div className="container">
-                    <p className="float-end mb-1">
-                        <a href="#end">Back to top</a>
-                    </p>
-                    <p className="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-                    <p className="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
+            <footer className="footer">
+                <div className="footer-container">
+                    <div className="footer-row">
+                        <div className="footer-col">
+                            <h4>Cégünkről</h4>
+                            <ul>
+                                <li><a href="#">Rólunk</a></li>
+                                <li><a href="#">Szolgáltatásaink</a></li>
+                                <li><a href="#">Adatvédelem</a></li>
+                                <li><a href="#">Partnerprogram</a></li>
+                            </ul>
+                        </div>
+                        <div className="footer-col">
+                            <h4>Segítség</h4>
+                            <ul>
+                                <li><a href="#">Gyakori kérdések</a></li>
+                                <li><a href="#">Szállítás</a></li>
+                                <li><a href="#">Visszatérítés</a></li>
+                                <li><a href="#">Rendelés állapota</a></li>
+                                <li><a href="#">Fizetési lehetőségek</a></li>
+                            </ul>
+                        </div>
+                        <div className="footer-col">
+                            <h4>Kövess minket</h4>
+                            <div className="social-links">
+                                <a href="https://www.facebook.com/kandomiskolc/reels/" target='blank'>
+                                <img className='img-social-kando' src= {kando}
+                                width="50" height="50"/>
+                                <i className="fab fa-facebook-f"></i></a>
+                                {/* <a href="#"><i className="fab fa-twitter"></i></a> */}
+                                {/* <a href="#"><i className="fab fa-instagram"></i></a> */}
+                                {/* <a href="#"><i className="fab fa-linkedin-in"></i></a> */}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </footer>
         </>
-
     );
 }
 
