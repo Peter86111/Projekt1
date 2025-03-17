@@ -1,10 +1,11 @@
 import logo from './mr_q_mod.png';
 import basket from './cart.svg';
+
 import kando from './kando.jpg';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, NavLink } from 'react-bootstrap';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Production from './components/Production'
+import Production from './components/Production';
 
 function App() {
     return (
@@ -50,7 +51,7 @@ function App() {
                             {/* Bejelentkezés */}
                         </Nav.Link>
                         <Nav.Link className='topnav-basket' href="#shoppingBasket">
-                            <img src={basket} width="40" height="40" alt="basket" />
+                            <img src={basket} width="35" height="35" alt="basket" />
                             {/* Kosár */}
                         </Nav.Link>
                     </Nav>
@@ -89,17 +90,21 @@ function App() {
                             <h4>Kövess minket</h4>
                             <div className="social-links">
                                 <a href="https://www.facebook.com/kandomiskolc/reels/" target='blank'>
-                                <img className='img-social-kando' src= {kando}
-                                width="50" height="50"/>
-                                <i className="fab fa-facebook-f"></i></a>
+                                    <img className='img-social-kando' src={kando}
+                                        width="50" height="50" />
+                                    <i className="fab fa-facebook-f"></i></a>
                                 {/* <a href="#"><i className="fab fa-twitter"></i></a> */}
                                 {/* <a href="#"><i className="fab fa-instagram"></i></a> */}
                                 {/* <a href="#"><i className="fab fa-linkedin-in"></i></a> */}
                             </div>
                         </div>
                     </div>
+                    <div className='jog'>
+                        <p>© Minden jog fenntartva</p>
+                    </div>
                 </div>
             </footer>
+
         </>
     );
 }

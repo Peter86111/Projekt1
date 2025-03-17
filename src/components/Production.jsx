@@ -39,7 +39,7 @@ const ProductList = () => {
                     </div>
                 ))
             ) : (
-                <p className="text-center w-100">Nincsenek elérhető termékek.</p>
+                <p className="no-products">Nincsenek elérhető termékek.</p>
             )}
         </div>
     );

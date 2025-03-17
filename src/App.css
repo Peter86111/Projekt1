@@ -83,7 +83,15 @@
 
 .ml-auto {
   margin-left: auto;
-  margin-right: 30px;
+  margin-right: 20px;
+}
+
+.no-products{
+  color: white;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
 }
 
 .topnav-registration {
@@ -99,13 +107,18 @@
   border-radius: 50%;
 }
 
+.jog {
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
 /* Footer */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-body {
+/* body {
   line-height: 1.5;
   font-family: 'Poppins', sans-serif;
-}
+} */
 
 * {
   margin: 0;
