@@ -1,23 +1,35 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using mrq.Models;
 
-namespace mrq.Controllers
+[ApiController]
+[Route("api/[controller]")]
+public class ProductsController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
-    {
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
-        {
-            using (var context = new WebstoreContext())
-            {
-                var product = await context.Products.Include(x=> x.Category).ToListAsync();
+    private readonly WebstoreContext _context;
 
-                return Ok(new { result = product, message = "Sikeres lekérdezés." });
-            }
-        }
+    public ProductsController(WebstoreContext context)
+    {
+        _context = context;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult> GetAll()
+    {
+        var products = await _context.Products
+            .Include(p => p.Category)
+            .Select(p => new
+            {
+                p.Id,
+                p.Name,
+                p.Price,
+                Picture = p.Picture.StartsWith("http") ? p.Picture : $"https://pro2025.nhely.hu/img/{p.Picture}",
+
+                Category = p.Category.CategoryName
+            })
+            .ToListAsync();
+
+        return Ok(new { result = products, message = "Sikeres lekérdezés." });
     }
 }
+
