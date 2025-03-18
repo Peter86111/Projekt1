@@ -1,6 +1,5 @@
 import logo from './mr_q_mod.png';
 import basket from './cart.svg';
-
 import kando from './kando.jpg';
 import { Navbar, Nav, NavLink } from 'react-bootstrap';
 import "./App.css";
