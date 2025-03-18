@@ -103,6 +103,11 @@
   margin-right: auto;
 }
 
+.img-products {
+  width: auto;
+  height: auto;
+}
+
 .img-social-kando {
   border-radius: 50%;
 }

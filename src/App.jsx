@@ -3,7 +3,7 @@ import basket from './cart.svg';
 import kando from './kando.jpg';
 import { Navbar, Nav, NavLink } from 'react-bootstrap';
 import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Production from './components/Production';
 
 function App() {
