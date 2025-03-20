@@ -3,8 +3,8 @@ import basket from './cart.svg';
 import kando from './kando.jpg';
 import { Navbar, Nav, NavLink } from 'react-bootstrap';
 import "./App.css";
-
 import Production from './components/Production';
+import SearchList from './components/Search';
 
 function App() {
     return (
@@ -17,6 +17,7 @@ function App() {
                         width="238" height="100"
                         alt="Logo" />
                 </Navbar.Brand>
+
                 <Navbar.Toggle
                     aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse
@@ -56,6 +57,11 @@ function App() {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+            <Nav>
+                <div>
+                <SearchList/>
+                </div>                
+            </Nav>
 
             <div className="album py-5 bg-body-tertiary bg-dark">
                 <div className="container-fluid bg-dark shadow-sm">
