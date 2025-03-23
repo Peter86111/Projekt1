@@ -87,11 +87,15 @@
 }
 
 .h1-modify {
-  font-size: medium;
+  margin-left: 20px;
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.h2-modify {
-  font-size: medium;
+select {
+  width: 150px;
+  border-radius:20px;
+  text-align: center;
 }
 
 .footer {
