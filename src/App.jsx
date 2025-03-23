@@ -5,11 +5,7 @@ import kando from './kando.jpg';
 import { Navbar, Nav } from 'react-bootstrap';
 import "./App.css";
 import Production from './components/Production';
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 import CategoryMenu from './components/Search';
-import AdminButton from './components/AdminButton';
-import AdminDashboard from './components/AdminDashboard'; 
 
 function App() {
     return (
@@ -60,31 +56,20 @@ function App() {
                             <img src={basket} width="35" height="35" alt="basket" />
                             {/* Kosár */}
                         </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-
-                {/* CategoryMenu */}
-                <Nav className="bg-dark">
-                    <CategoryMenu />
-                </Nav>
-
-                {/* Admin Button */}
-                <AdminButton adminName="Admin" />
-
-                {/* Route setup */}
-                <Routes>
-                    {/* AdminDashboard route */}
-                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                    {/* Egyéb route-ok */}
-                </Routes>
-
-                {/* Produkciós rész */}
-                <div className="album py-5 bg-dark">
-                    <div className="container-fluid bg-dark shadow-sm">
-                        <Production />
-                    </div>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+            <Nav className="bg-dark">
+                <div>
+                <CategoryMenu />
                 </div>
+            </Nav>
+
+            <div className="album py-5 bg-dark">
+                <div className="container-fluid bg-dark shadow-sm">
+                    <Production />
+                </div>
+            </div>
 
             <footer className="footer bg-dark">
                 <div className="footer-container">
