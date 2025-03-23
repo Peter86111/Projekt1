@@ -9,11 +9,14 @@ const AdminButton = ({ adminName = "Admin" }) => {
     };
 
     return (
+        <div className="bg-dark">
         <button 
             onClick={handleClick} 
-            className="bg-blue-500 text-white px-4 py-2 rounded">
-            {adminName} {}
+            className="bg-dark px-4 py-2 rounded">
+            {adminName}
         </button>
+        </div>
+
     );
 };
 

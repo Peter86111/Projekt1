@@ -1,9 +1,7 @@
 import React from 'react'
 
-function DeleteProduct(props)
-{
-    const handleProductId = async () =>
-    {
+function DeleteProduct(props) {
+    const handleProductId = async () => {
         const url = `https://localhost:7012/cars?id=${props.productId}`
 
         const request = await fetch(url, {
@@ -13,8 +11,7 @@ function DeleteProduct(props)
             }
         })
 
-        if (!request.ok)
-        {
+        if (!request.ok) {
             console.log("Hiba")
             return
         }
@@ -25,8 +22,10 @@ function DeleteProduct(props)
     }
 
     return (
-        <div><button className='btn btn-danger' onClick={handleProductId}>Töröl</button></div>
+        <div>
+            <button className='btn btn-danger' onClick={handleProductId}>Töröl</button>
+        </div>
     )
 }
 
-export default DeleteProduct
+export default DeleteProduct;

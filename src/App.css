@@ -86,6 +86,11 @@
   color: white;
 }
 
+.h1-admin {
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .h1-modify {
   margin-left: 20px;
   font-size: large;

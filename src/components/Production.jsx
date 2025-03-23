@@ -7,7 +7,7 @@ const ProductBrowser = () => {
   const [products, setProducts] = useState([]);
 
   // Kategóriák lekérése
-  useEffect( async () => {
+  useEffect(async () => {
     await axios.get("https://localhost:7012/api/Categories")
       .then((restore) => setCategories(restore.data))
       .catch((error) => console.error("Hiba a kategóriák lekérésekor", error));
@@ -15,7 +15,7 @@ const ProductBrowser = () => {
 
   // Alapértelmezésben MINDEN termék lekérése
   useEffect(async () => {
-    await axios.get("https://localhost:7012/api/Products") // Ez adjon vissza MINDEN terméket
+    await axios.get("https://localhost:7012/api/Products") // Adjon vissza MINDEN terméket
       .then((restore) => {
         setProducts(restore.data.result);
       })

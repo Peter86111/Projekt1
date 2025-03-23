@@ -5,8 +5,8 @@ import DeleteProduct from "./DeleteProduct";
 
 const AdminDashboard = () => {
     return (
-        <div>
-            <h1>Admin Felület</h1>
+        <div className="bg-dark">
+            <h1 className="h1-admin">Admin Felület</h1>
            <AddNewProduct />     <UpdateProduct />    <DeleteProduct />
         </div>
     );

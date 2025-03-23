@@ -44,11 +44,11 @@ function GetallProduct(props)
                 
                 <div 
                 onDoubleClick={() => { handleProductObj(car) }} className="card m-3 pt-2" style={{ 'width': 200, 'float': 'left' }} key={car.id}>
-                    <div className="card-header">{product.name}</div>
-                    <div className="card-body">{product.price}</div>
-                    <div className="card-footer">{product.description}</div>
-                    <div className="card-footer">{product.category}</div>
-                    <div><DeleteProduct productId={product.id} handleCount={props.handleCount} /></div>
+                    <div className="card-header bg-dark">{product.name}</div>
+                    <div className="card-body bg-dark">{product.price}</div>
+                    <div className="card-footer bg-dark">{product.description}</div>
+                    <div className="card-footer bg-dark">{product.category}</div>
+                    <div className="bg-dark"><DeleteProduct productId={product.id} handleCount={props.handleCount} /></div>
                 </div>
             )
         }
@@ -63,4 +63,4 @@ function GetallProduct(props)
     )
 }
 
-export default GetallCars
+export default GetallProduct;

@@ -48,7 +48,7 @@ function AddNewProduct(props) {
 
   return (
     <div>
-      <h1><label>Új termék felvétele:</label></h1>
+      <h1 className='h1-admin'><label>Új termék felvétele:</label></h1>
       <form onSubmit={handleSubmit} className=''>
         <label>Termék neve:</label>
         <input
