@@ -17,7 +17,6 @@ const ProductBrowser = () => {
   useEffect(async () => {
     await axios.get("https://localhost:7012/api/Products") // Ez adjon vissza MINDEN terméket
       .then((restore) => {
-        // pl. res.data.result, ha így küldöd
         setProducts(restore.data.result);
       })
       .catch((error) => console.error("Hiba a termékek lekérésekor", error));
@@ -75,7 +74,7 @@ const ProductBrowser = () => {
             </div>
           ))
         ) : (
-          <p>Nincsenek elérhető termékek</p>
+          <p className="no-products">Nincsenek elérhető termékek</p>
         )}
       </div>
     </div>
