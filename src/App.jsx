@@ -1,13 +1,16 @@
+
 import logo from './mr_q_mod.png';
 import basket from './cart.svg';
 import kando from './kando.jpg';
 import { Navbar, Nav } from 'react-bootstrap';
 import "./App.css";
 import Production from './components/Production';
+import CategoryMenu from './components/Search';
 
 function App() {
     return (
-        <>
+        <Router> {}
+            <>
             <Navbar bg="dark" expand="lg"
                 variant="dark"
                 className="container-fluid">
@@ -58,9 +61,15 @@ function App() {
             </Navbar>
             <Nav className="bg-dark">
                 <div>
-                <Production />
+                <CategoryMenu />
                 </div>
             </Nav>
+
+            <div className="album py-5 bg-dark">
+                <div className="container-fluid bg-dark shadow-sm">
+                    <Production />
+                </div>
+            </div>
 
             <footer className="footer bg-dark">
                 <div className="footer-container">
@@ -103,6 +112,7 @@ function App() {
                 </div>
             </footer>
         </>
+          </Router>
     );
 }
 
