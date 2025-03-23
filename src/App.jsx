@@ -1,10 +1,10 @@
 import logo from './mr_q_mod.png';
 import basket from './cart.svg';
 import kando from './kando.jpg';
-import { Navbar, Nav, NavLink } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import "./App.css";
 import Production from './components/Production';
-import SearchList from './components/Search';
+import CategoryMenu from './components/Search';
 
 function App() {
     return (
@@ -57,19 +57,19 @@ function App() {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Nav>
+            <Nav className="bg-dark">
                 <div>
-                <SearchList/>
-                </div>                
+                <CategoryMenu />
+                </div>
             </Nav>
 
-            <div className="album py-5 bg-body-tertiary bg-dark">
+            <div className="album py-5 bg-dark">
                 <div className="container-fluid bg-dark shadow-sm">
                     <Production />
                 </div>
             </div>
 
-            <footer className="footer">
+            <footer className="footer bg-dark">
                 <div className="footer-container">
                     <div className="footer-row">
                         <div className="footer-col">

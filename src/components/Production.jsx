@@ -21,7 +21,7 @@ const ProductList = () => {
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {productsData.length > 0 ? (
                 productsData.map(product => (
-                    <div className="col" key={product.id}>
+                    <div className="col border-line-red" key={product.id}>
                         <div className="card shadow-sm">
                             <img className="img-products" src={product.picture}  alt="product image" />
                             <div className="card-body">

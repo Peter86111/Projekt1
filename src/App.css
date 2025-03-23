@@ -76,9 +76,32 @@
   display: block !important;
 }
 
+.border-line-red {
+  background-color: transparent;
+  border-radius: 10px;
+  border: solid 2px #e91e63;
+}
+
+.bg-dark {
+  color: white;
+}
+
+.h1-modify {
+  font-size: medium;
+}
+
+.h2-modify {
+  font-size: medium;
+}
+
+.footer {
+  margin: 0px;
+  padding: 0px;
+}
+
 .row {
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
+  padding: auto;
 }
 
 .ml-auto {
