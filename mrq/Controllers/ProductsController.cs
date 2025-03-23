@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using mrq.Models;
 
-[ApiController]
 [Route("api/[controller]")]
+[ApiController]
 public class ProductsController : ControllerBase
 {
     private readonly WebstoreContext _context;
@@ -13,6 +13,7 @@ public class ProductsController : ControllerBase
         _context = context;
     }
 
+    // GET: api/Products
     [HttpGet]
     public async Task<ActionResult> GetAll()
     {
@@ -30,6 +31,25 @@ public class ProductsController : ControllerBase
             .ToListAsync();
 
         return Ok(new { result = products, message = "Sikeres lekérdezés." });
+    }
+
+    // GET: api/Categories/5/products
+    [HttpGet("{id}/products")]
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductsForCategory(int id)
+    {
+        var category = await _context.Categories
+            .Include(c => c.Products)
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        if (category == null)
+        {
+            return NotFound();
+        }
+
+        // Ha van beállítva a reláció: c.Products
+        // Vagy explicit lekérdezéssel:
+        // var products = await _context.Products.Where(p => p.CategoryId == id).ToListAsync();
+        return Ok(category.Products);
     }
 }
 
