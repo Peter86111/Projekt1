@@ -61,12 +61,7 @@ function App() {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-
-                {/* CategoryMenu */}
-                <Nav className="bg-dark">
-                    <CategoryMenu />
-                </Nav>
-
+                
                 {/* Admin Button */}
                 <AdminButton adminName="Admin" />
 
