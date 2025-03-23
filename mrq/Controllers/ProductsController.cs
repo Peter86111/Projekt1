@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using mrq.Models;
 using mrq.DTOs;
 
-[ApiController]
 [Route("api/[controller]")]
+[ApiController]
 public class ProductsController : ControllerBase
 {
     private readonly WebstoreContext _context;
@@ -13,6 +13,7 @@ public class ProductsController : ControllerBase
     {
         _context = context;
     }
+
 
     [HttpGet("{id}/products")]
     public async Task<ActionResult<IEnumerable<Product>>> GetProductsForCategory(int id)
@@ -123,6 +124,10 @@ public class ProductsController : ControllerBase
         }
     }
         [HttpGet]
+
+    // GET: api/Products
+    [HttpGet]
+
     public async Task<ActionResult> GetAll()
     {
         var products = await _context.Products
@@ -140,6 +145,7 @@ public class ProductsController : ControllerBase
 
         return Ok(new { result = products, message = "Sikeres lekérdezés." });
     }
+
 }
 
 
