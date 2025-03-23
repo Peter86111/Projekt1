@@ -66,7 +66,7 @@ function App() {
 
                 {/* CategoryMenu */}
                 <Nav className="bg-dark">
-                    <CategoryMenu />
+                  
                 </Nav>
 
                 {/* Admin Button */}
