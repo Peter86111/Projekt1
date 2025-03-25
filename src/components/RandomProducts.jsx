@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 function GetRandomProducts({ products }) {
-  // Ellenőrizzük, hogy a products tényleg egy tömb-e, és ha nem, akkor egy üres tömböt adunk neki
-  const validProducts = Array.isArray(products) ? products : [];
-
   // Véletlenszerű termékek kiválasztása
   const getRandomProducts = (products, numberOfProducts = 3) => {
-    if (products.length === 0) {
-      return []; // Ha a 'products' üres, akkor üres listát adunk vissza
-    }
-    
     const shuffled = [...products].sort(() => 0.5 - Math.random()); // Random sorrend
     return shuffled.slice(0, numberOfProducts); // Válaszd ki az első X terméket
   };
 
-  const randomProducts = getRandomProducts(validProducts, 3); // 3 véletlenszerű terméket
+  const randomProducts = getRandomProducts(products, 3); // 3 véletlenszerű terméket
 
   return (
     <div className="container py-4">
@@ -47,4 +40,3 @@ function GetRandomProducts({ products }) {
 }
 
 export default GetRandomProducts;
-
