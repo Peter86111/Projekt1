@@ -1,107 +1,87 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using mrq.DTOs;
 using mrq.Models;
+using mrq.Services;
 
 namespace mrq.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("auth")]
     [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly WebstoreContext _context;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public UsersController(WebstoreContext context)
+        private readonly TokenGenerator tokenGenerator;
+
+        public UsersController(WebstoreContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, TokenGenerator tokenGenerator)
         {
             _context = context;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+            this.tokenGenerator = tokenGenerator;
         }
 
-        // GET: api/Users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        [HttpPost("register")]
+        public async Task<ActionResult> AddNewUser(RegisterRequestDto registerRequestDto)
         {
-            return await _context.Users.ToListAsync();
+            var user = new ApplicationUser
+            {
+                UserName = registerRequestDto.UserName,
+                Email = registerRequestDto.Email
+            };
+
+            var result = await userManager.CreateAsync(user, registerRequestDto.Password);
+
+            if (result.Succeeded)
+            {
+                var userReturn = await _context.Users.FirstOrDefaultAsync(user => user.UserName == registerRequestDto.UserName);
+
+                return Ok(new { result = userReturn, message = "Sikeres regisztráció." });
+            }
+
+            return BadRequest(new { result = "", message = result.Errors.FirstOrDefault().Description });
         }
 
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpPost("login")]
+        public async Task<ActionResult> LoginUser(LoginRequestDto loginRequestDto)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.FirstOrDefaultAsync(user => user.NormalizedUserName == loginRequestDto.UserName.ToUpper());
 
-            if (user == null)
+            bool isValid = await userManager.CheckPasswordAsync(user, loginRequestDto.Password);
+
+            if (isValid)
             {
-                return NotFound();
+                var roles = await userManager.GetRolesAsync(user);
+                var jwtToken = tokenGenerator.GenerateToken(user, roles);
+
+                return Ok(new { result = new { user.UserName, user.Email }, message = "Sikeres beléptetés.", token = jwtToken });
             }
 
-            return user;
+            return BadRequest(new { result = "", message = "Nem regisztrált.", token = "" });
         }
 
-        // PUT: api/Users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpPost("assignrole")]
+        public async Task<ActionResult> AddRole(string UserName, string roleName)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
+            var user = await _context.Users.FirstOrDefaultAsync(user => user.NormalizedUserName == UserName.ToUpper());
 
-            _context.Entry(user).State = EntityState.Modified;
-
-            try
+            if (user != null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
+                if (!roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
                 {
-                    return NotFound();
+                    roleManager.CreateAsync(new IdentityRole(roleName)).GetAwaiter().GetResult();
                 }
-                else
-                {
-                    throw;
-                }
+
+                await userManager.AddToRoleAsync(user, roleName);
+
+                return Ok(new { result = user, message = "Sikeres hozzárendelés." });
             }
 
-            return NoContent();
-        }
-
-        // POST: api/Users
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
-        }
-
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool UserExists(int id)
-        {
-            return _context.Users.Any(e => e.Id == id);
+            return BadRequest(new { result = "", message = "Sikertelen hozzárendelés." });
         }
     }
 }
