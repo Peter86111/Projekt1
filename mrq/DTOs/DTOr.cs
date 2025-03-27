@@ -1,4 +1,6 @@
-﻿namespace mrq.DTOs
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace mrq.DTOs
 
 {
     public record RegisterRequestDto(string UserName, string Password, string Email, DateTime BirthDate);
