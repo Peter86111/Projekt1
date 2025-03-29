@@ -36,15 +36,15 @@ export const Login = () =>
   };
 
   return (
-    <div >
-      <div >
+    <div className="bg-dark">
+      <div>
         <h1 style={styles.title}>Bejelentkezés</h1>
         {error && <p style={styles.error}>{error}</p>}
         <div style={styles.inputGroup}>
           <label style={styles.label}>Felhasználónév:</label>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Felhasználónév"
             value={username} // <-- Itt javítva lett
             onChange={(e) => setUsername(e.target.value)}
             style={styles.input}
@@ -68,44 +68,49 @@ export const Login = () =>
   );
 };
 
-// Stílusok (ha nem voltak definiálva)
+// Stílusok
 const styles = {
   container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "50vh",
   },
   title: {
-    fontSize: "24px",
-    marginBottom: "20px",
+      fontSize: "24px",
+      marginBottom: "20px",
+      textAlign: "center",
   },
   error: {
-    color: "red",
-    marginBottom: "10px",
+      color: "red",
+      marginBottom: "10px",
+      textAlign: "center",
   },
   inputGroup: {
-    display: "flex",
-    flexDirection: "column",
-    marginBottom: "15px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      marginBottom: "15px",
   },
   label: {
-    marginBottom: "5px",
+      marginBottom: "5px",
   },
   input: {
-    padding: "8px",
-    fontSize: "16px",
-    width: "250px",
+      padding: "8px",
+      fontSize: "16px",
+      width: "250px",
   },
   button: {
-    padding: "10px 20px",
-    fontSize: "16px",
-    cursor: "pointer",
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
+      display: "block",
+      margin: "0 auto",
+      padding: "10px 20px",
+      fontSize: "16px",
+      cursor: "pointer",
+      backgroundColor: "#007bff",
+      color: "white",
+      border: "none",
+      borderRadius: "5px",      
   },
 };
 

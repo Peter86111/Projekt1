@@ -24,10 +24,10 @@ function Home() {
   }, []);
 
   return (
-    <div className="bg-dark text-white">
-      <h1>Üdvözöljük a MR Q Electronics-nál!</h1>
+    <div style={styles.container} className="bg-dark text-white">
+      <h1 style={styles.title}>Üdvözöljük a MR Q Electronics-nál!</h1>
       <p>Fedezze fel legújabb termékeinket és szolgáltatásainkat.</p>
-      <div className="col-md-6">
+      <div style={styles.title} className="col-md-6">
         <h3>Miért válasszon minket?</h3>
         <ul>
           <li>Professzionális alkatrészek</li>
@@ -39,6 +39,22 @@ function Home() {
     </div>
   );
 }
+
+// Stílusok
+const styles = {
+  container: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "50vh",
+  },
+  title: {
+      fontSize: "24px",
+      marginBottom: "20px",
+      textAlign: "center",
+  }, 
+};
 
 export default Home;
 

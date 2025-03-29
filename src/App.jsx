@@ -1,7 +1,6 @@
-import AdminButton from './components/AdminButton';
 import AdminDashboard from './components/AdminDashboard';
 import Login from './components/Login'
-import CategoryMenu from './components/Search';
+import Logout from './components/Logout';
 import Home from './components/Home';
 import Services from './components/Services';
 import AboutUs from './components/AboutUs';
@@ -12,11 +11,11 @@ import { Navbar, Nav, } from 'react-bootstrap';
 import "./App.css";
 import Production from './components/Production';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';;
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; import { Registration } from './components/Registration';
 
 
-function App()
-{
+function App() {
+    
     return (
 
         <Router>
@@ -27,8 +26,7 @@ function App()
                     <img src={logo}
                         width="238" height="100"
                         alt="Logo" />
-                </Navbar.Brand>
-
+                </Navbar.Brand>                
                 <Navbar.Toggle
                     aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse
@@ -40,18 +38,11 @@ function App()
                         <Nav.Link href="/szolgaltatasok">Szolgáltatások</Nav.Link>
                         <Nav.Link href="/rolunk">Rólunk</Nav.Link>
                         <Nav.Link href="/admin">Admin</Nav.Link>
-                        <Nav.Link href="#registration">
-                            Regisztráció
-                        </Nav.Link>
-                        <Nav.Link href="#login">
-
-                            <Login />
-
-                            {/* Bejelentkezés */}
-                        </Nav.Link>
+                        <Nav.Link href="/registration">Regisztráció</Nav.Link>
+                        <Nav.Link href="/login">Bejelentekezés</Nav.Link>
+                        <Nav.Link href="/logout">Kijelentkezés</Nav.Link>
                         <Nav.Link className='topnav-basket' href="#shoppingBasket">
                             <img src={basket} width="35" height="35" alt="basket" />
-                            {/* Kosár */}
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
@@ -63,9 +54,11 @@ function App()
                 <Route path="/szolgaltatasok" element={<Services />} />
                 <Route path="/rolunk" element={<AboutUs />} />
                 <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/registration" element={<Registration />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/logout" element={<Logout />} />
             </Routes>
 
-            {/* CategoryMenu */}
             <Nav className="bg-dark">
 
                 <footer className="footer bg-dark">

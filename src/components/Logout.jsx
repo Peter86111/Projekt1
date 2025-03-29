@@ -12,7 +12,7 @@ export const Logout = () => {
       el: vantaRef.current,
       THREE,
       color: 0xff0000, // Karácsonyi piros
-      backgroundColor: 0x001f3f, // Mélykék háttér
+      backgroundColor: 0x24262b, // Mélykék háttér
       points: 12.0,
       maxDistance: 20.0,
       spacing: 18.0,
@@ -32,7 +32,7 @@ export const Logout = () => {
     <div ref={vantaRef} style={{ height: "100vh", width: "100%", position: "relative" }}>
       <div style={styles.container}>
         <h1 style={styles.title}>Kijelentkezés</h1>
-        <p style={styles.message}>Köszönjük, hogy velünk voltál! 🌟</p>
+        <p style={styles.message}>Viszont látásra!</p>
         <button onClick={handleLogout} style={styles.button}>
           Kijelentkezés
         </button>
@@ -73,3 +73,5 @@ const styles = {
     fontWeight: "bold",
   },
 };
+
+export default Logout;

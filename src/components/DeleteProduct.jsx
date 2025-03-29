@@ -22,10 +22,33 @@ function DeleteProduct(props) {
     }
 
     return (
-        <div>
-            <button className='btn btn-danger' onClick={handleProductId}>Töröl</button>
+        <div style={styles.container}>
+            <button style={styles.button} onClick={handleProductId}>Töröl</button>
         </div>
     )
 }
+
+// Stílusok
+const styles = {
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "50vh",
+    },   
+    button: {
+        display: "block",
+        margin: "0 auto",
+        padding: "10px 20px",
+        fontSize: "16px",
+        cursor: "pointer",
+        backgroundColor: "#007bff",
+        color: "white",
+        border: "none",
+        borderRadius: "5px",
+        textAlign: "center",
+    },
+};
 
 export default DeleteProduct;

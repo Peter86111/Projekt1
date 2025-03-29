@@ -47,9 +47,9 @@ const ProductBrowser = () => {
   };
 
   return (
-    <div>
-      <h1 className="h1-modify">Kategóriák</h1>
-      <select value={selectedCategory} onChange={(e) => handleCategoryChange(e.target.value)}>
+    <div className="bg-dark">
+      <h1 className="h1-modify bg-dark">Kategóriák</h1>
+      <select className="bg-dark" value={selectedCategory} onChange={(e) => handleCategoryChange(e.target.value)}>
         <option value="">Válassz...</option>
         {categories.map((cat) => (
           <option key={cat.id} value={cat.id}>
@@ -59,10 +59,10 @@ const ProductBrowser = () => {
       </select>
 
       {/* TERMÉKLISTA */}
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 bg-dark">
         {products && products.length > 0 ? (
           products.map((p) => (
-            <div className="col border-line-red" key={p.id}>
+            <div className="col bg-dark border-line-red" key={p.id}>
               <div className="card shadow-sm">
                 <img className="img-products" src={p.picture} alt="product" />
                 <div className="card-body">

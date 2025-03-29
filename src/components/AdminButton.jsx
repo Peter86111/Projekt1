@@ -9,7 +9,7 @@ const AdminButton = ({ adminName = "Admin" }) => {
     };
 
     return (
-        <div className="bg-dark">
+        <div className="bg-dark" style={styles.container}>
         <button 
             onClick={handleClick} 
             className="bg-dark px-4 py-2 rounded">
@@ -20,5 +20,15 @@ const AdminButton = ({ adminName = "Admin" }) => {
     );
 };
 
-export default AdminButton;
+// Stílus
+const styles = {
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "50vh",
+    },    
+};
 
+export default AdminButton;
