@@ -9,15 +9,12 @@ public partial class WebstoreContext : IdentityDbContext<ApplicationUser>
     {
     }
 
-    protected WebstoreContext()
+    //from protected to public!!!
+    public WebstoreContext()
     {
     }
 
     public virtual DbSet<Category> Categories { get; set; }
-
     public virtual DbSet<Product> Products { get; set; }
-
     public virtual DbSet<ApplicationUser> Users { get; set; }
-
-
 }
