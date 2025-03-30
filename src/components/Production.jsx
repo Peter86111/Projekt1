@@ -6,20 +6,32 @@ const ProductBrowser = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [products, setProducts] = useState([]);
 
-  // Kategóriák lekérése
-  useEffect(async () => {
-    await axios.get("https://localhost:7012/api/Categories")
-      .then((restore) => setCategories(restore.data))
-      .catch((error) => console.error("Hiba a kategóriák lekérésekor", error));
+  // 1. Kategóriák lekérése
+  useEffect(() => {
+    // a useEffect callback NEM async,
+    // belül definiálunk és hívunk egy aszinkron függvényt:
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("https://localhost:7012/api/Categories");
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Hiba a kategóriák lekérésekor", error);
+      }
+    };
+    fetchCategories();
   }, []);
 
-  // Alapértelmezésben MINDEN termék lekérése
-  useEffect(async () => {
-    await axios.get("https://localhost:7012/api/Products") // Adjon vissza MINDEN terméket
-      .then((restore) => {
-        setProducts(restore.data.result);
-      })
-      .catch((error) => console.error("Hiba a termékek lekérésekor", error));
+  // 2. Alapértelmezésben MINDEN termék lekérése
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        const response = await axios.get("https://localhost:7012/api/Products");
+        setProducts(response.data.result);
+      } catch (error) {
+        console.error("Hiba a termékek lekérésekor", error);
+      }
+    };
+    fetchAllProducts();
   }, []);
 
   // Ha a user változtatja a kategóriát
@@ -27,8 +39,7 @@ const ProductBrowser = () => {
     setSelectedCategory(categoryId);
 
     if (!categoryId) {
-      // Ha üres (pl. "Válassz...")
-      // akkor újra töltheted a teljes listát
+      // Ha üres (pl. "Válassz...") => újra a teljes lista
       try {
         const allResponse = await axios.get("https://localhost:7012/api/Products");
         setProducts(allResponse.data.result);
@@ -38,7 +49,9 @@ const ProductBrowser = () => {
     } else {
       // Lekérjük a kiválasztott kategória termékeit
       try {
-        const response = await axios.get(`https://localhost:7012/api/Products/${categoryId}/products`);
+        const response = await axios.get(
+          `https://localhost:7012/api/Products/${categoryId}/products`
+        );
         setProducts(response.data);
       } catch (error) {
         console.error("Hiba a szűrt termékek lekérésekor: ", error);
@@ -49,7 +62,11 @@ const ProductBrowser = () => {
   return (
     <div className="bg-dark">
       <h1 className="h1-modify bg-dark">Kategóriák</h1>
-      <select className="bg-dark" value={selectedCategory} onChange={(e) => handleCategoryChange(e.target.value)}>
+      <select
+        className="bg-dark"
+        value={selectedCategory}
+        onChange={(e) => handleCategoryChange(e.target.value)}
+      >
         <option value="">Válassz...</option>
         {categories.map((cat) => (
           <option key={cat.id} value={cat.id}>

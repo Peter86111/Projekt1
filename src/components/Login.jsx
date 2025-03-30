@@ -22,6 +22,7 @@ export const Login = () =>
       localStorage.setItem("jwt", token.token);
       console.log(token.token);
       console.log(token.message);
+
       /*var x = localStorage.getItem("jwt");
       var y = jwtDecode(x);
 
@@ -30,7 +31,7 @@ export const Login = () =>
       navigate("/termekek");
     } catch (error)
     {
-      setError("Hitelesítés sikertelen. Ellenőrizd a bejelentkezési adatokat!");
+      setError("A hitelesítés sikertelen. Ellenőrizd a bejelentkezési adatokat!");
       console.error("Hiba a bejelentkezés során: ", error);
     }
   };
@@ -75,7 +76,7 @@ const styles = {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      height: "50vh",
+      height: "80vh",
   },
   title: {
       fontSize: "24px",

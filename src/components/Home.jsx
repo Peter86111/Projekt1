@@ -8,7 +8,7 @@ function Home() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch('https://localhost:7012/products');
+        const response = await fetch('https://localhost:7012/api/Products');
         const data = await response.json();
         
         // Ellenőrizzük, hogy a válasz tartalmazza-e a termékek listáját és biztosítjuk, hogy egy tömböt kapjunk
@@ -24,7 +24,7 @@ function Home() {
   }, []);
 
   return (
-    <div style={styles.container} className="bg-dark text-white">
+    <div style={styles.container} className="bg-dark">
       <h1 style={styles.title}>Üdvözöljük a MR Q Electronics-nál!</h1>
       <p>Fedezze fel legújabb termékeinket és szolgáltatásainkat.</p>
       <div style={styles.title} className="col-md-6">
@@ -47,7 +47,7 @@ const styles = {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      height: "50vh",
+      height: "80vh",
   },
   title: {
       fontSize: "24px",
@@ -56,6 +56,4 @@ const styles = {
   }, 
 };
 
-export default Home;
-
-    
+export default Home;    

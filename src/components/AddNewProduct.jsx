@@ -1,104 +1,126 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function AddNewProduct(props) {
-  const [productData, setProductdata] = useState({
+  const [productData, setProductData] = useState({
     name: "",
     price: "",
     description: "",
-    category: "",
+    categoryId: 1, // default 1
+    picture: "",   // kép URL
   });
 
   useEffect(() => {
+    // Ha jön termékobjektum, akkor feltöltjük az állapotot
     if (props.productObj) {
-      setProductdata({
-        name: props.productObj.name || '',
-        price: props.productObj.price || '',
-        description: props.productObj.description || '',
-        category: props.productObj.category || '',
+      setProductData({
+        name: props.productObj.name || "",
+        price: props.productObj.price || "",
+        description: props.productObj.description || "",
+        categoryId: props.productObj.categoryId || 1,
+        picture: props.productObj.picture || "", // innen szedjük a kép elérhetőségét
       });
     }
   }, [props.productObj]);
 
+  // Mezők változása
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setProductdata({ ...productData, [name]: value });
+    setProductData((prev) => ({
+      ...prev,
+      [name]: name === "categoryId" ? Number(value) : value,
+    }));
   };
 
+  // Új termék létrehozása (POST)
   const handleSubmit = async (event) => {
-    const url = `https://localhost:7012/Products`;
-    event.preventDefault();
+    event.preventDefault(); 
+    const url = "https://localhost:7012/api/Products";
 
-    const request = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(productData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    try {
+      const response = await axios.post(url, productData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (!request.ok) {
-      console.log("Hiba");
-      return;
+      if (response.status === 201) {
+        // Sikeres POST
+        props.handleCount?.();
+        console.log(response.data.message); // "Sikeres felvétel." (vagy amit a backend küld)
+      } else {
+        console.log("Hiba: váratlan státuszkód", response.status);
+      }
+    } catch (error) {
+      console.error("Axios POST hiba:", error);
     }
-
-    const response = await request.json();
-    props.handleCount();
-    console.log(response.message);
   };
 
   return (
     <div className="bg-dark" style={styles.container}>
-      <h1 className='h1-admin' style={styles.title}><label>Új termék felvétele:</label></h1>
+      <h1 className="h1-admin" style={styles.title}>
+        <label>Új termék felvétele:</label>
+      </h1>
+      <form onSubmit={handleSubmit}>
         <div style={styles.inputGroup}>
           <label style={styles.label}>Termék neve:</label>
           <input
-            type='text'
-            id='name'
-            name='name'
+            type="text"
+            name="name"
             value={productData.name}
             onChange={handleChange}
-            placeholder='Termék neve'
+            placeholder="Termék neve"
             style={styles.input}
           />
         </div>
         <div style={styles.inputGroup}>
           <label style={styles.label}>Ár:</label>
           <input
-            type='number'
-            id='price'
-            name='price'
+            type="number"
+            name="price"
             value={productData.price}
             onChange={handleChange}
-            placeholder='Termék ára'
+            placeholder="Termék ára"
             style={styles.input}
           />
         </div>
         <div style={styles.inputGroup}>
           <label style={styles.label}>Leírás:</label>
           <input
-            type='text'
-            id='description'
-            name='description'
+            type="text"
+            name="description"
             value={productData.description}
             onChange={handleChange}
-            placeholder='Termék leírása'
+            placeholder="Termék leírása"
             style={styles.input}
           />
         </div>
         <div style={styles.inputGroup}>
-          <label style={styles.label}>Kategória:</label>
+          <label style={styles.label}>Kategória (ID):</label>
           <input
-            type='text'
-            id='category'
-            name='category'
-            value={productData.category}
+            type="number"
+            name="categoryId"
+            value={productData.categoryId}
             onChange={handleChange}
-            placeholder='Termék kategóriája'
+            placeholder="Termék kategória azonosítója"
             style={styles.input}
           />
         </div>
-
-        <button style={styles.button} onSubmit={handleSubmit}>Új termék mentése</button>
+        <div style={styles.inputGroup}>
+          <label style={styles.label}>Kép (URL):</label>
+          <input
+            type="text"
+            name="picture"
+            value={productData.picture}
+            onChange={handleChange}
+            placeholder="Kép URL-címe"
+            style={styles.input}
+          />
+        </div>
+        <button style={styles.button} type="submit">
+          Új termék mentése
+        </button>
+      </form>
     </div>
   );
 }
@@ -110,16 +132,11 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: "50vh",
+    height: "80vh",
   },
   title: {
     fontSize: "24px",
     marginBottom: "20px",
-    textAlign: "center",
-  },
-  error: {
-    color: "red",
-    marginBottom: "10px",
     textAlign: "center",
   },
   inputGroup: {

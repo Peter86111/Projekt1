@@ -11,8 +11,8 @@ export const Logout = () => {
     const vantaEffect = NET({
       el: vantaRef.current,
       THREE,
-      color: 0xff0000, // Karácsonyi piros
-      backgroundColor: 0x24262b, // Mélykék háttér
+      color: 0xff0000, 
+      backgroundColor: 0x24262b, 
       points: 12.0,
       maxDistance: 20.0,
       spacing: 18.0,
@@ -48,14 +48,14 @@ const styles = {
     left: "50%",
     transform: "translate(-50%, -50%)",
     textAlign: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.9)", // Fehér áttetsző doboz
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
     borderRadius: "15px",
     padding: "20px 30px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
     width: "300px",
   },
   title: {
-    color: "#ff4500", // Karácsonyi piros
+    color: "#ff4500",
     marginBottom: "10px",
   },
   message: {
@@ -64,7 +64,7 @@ const styles = {
     marginBottom: "20px",
   },
   button: {
-    backgroundColor: "#28a745", // Zöld gomb
+    backgroundColor: "#28a745",
     color: "white",
     border: "none",
     padding: "10px 15px",

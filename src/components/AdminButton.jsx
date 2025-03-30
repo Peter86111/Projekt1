@@ -27,7 +27,7 @@ const styles = {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "50vh",
+        height: "80vh",
     },    
 };
 
