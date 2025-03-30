@@ -5,12 +5,11 @@ namespace mrq.Models;
 
 public partial class WebstoreContext : IdentityDbContext<ApplicationUser>
 {
-    public WebstoreContext(DbContextOptions options) : base(options)
+    public WebstoreContext(DbContextOptions<WebstoreContext> options) : base(options)
     {
     }
-
-    //from protected to public!!!
-    public WebstoreContext()
+    
+    protected WebstoreContext()
     {
     }
 
