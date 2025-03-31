@@ -1,10 +1,17 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import AddNewProduct from "./AddNewProduct";
 import UpdateProduct from "./UpdateProduct";
 import DeleteProduct from "./DeleteProduct";
+import { useAuth } from "../context/AuthContext";
 
 export default function AdminDashboard() {
+  const { isAdmin } = useAuth();
+
+  if (!isAdmin) {
+    return <Navigate to="/" replace />; // Visszairányítás főoldalra
+  }
+
   return (
     <div className="bg-dark" style={styles.container}>
       <h2 style={styles.title}>Admin Dashboard</h2>

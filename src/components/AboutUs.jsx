@@ -2,26 +2,43 @@ import React from 'react';
 
 function AboutUs() {
   return (
-    <div style={styles.container} className="bg-dark">
-      <h1 style={styles.title}>Üdvözöljük a MR Q Electronics-nál!</h1>
-      <p></p>
-      <div className="col-md-6">
-        <p>A célunk, hogy a legjobb minőségű elektronikai termékeket és szolgáltatásokat nyújtsuk, a
-          versenyautók szerelmeseinek.  </p>
-        <ul>
-          <li>Egyedi tervezés</li>
-          <li>Szakmai segítség és szolgáltatás</li>
-          <li>Professzionális megjelenés</li>
-        </ul>
-        <h3 style={styles.title}>Kapcsolat</h3>
-        <p>
-          Ha bármilyen kérdése van, vagy további információt szeretne kapni, ne habozzon
-          kapcsolatba lépni velünk! Itt találja elérhetőségeinket:
-        </p>
-        <ul>
-          <li>Email:</li>
-          <li>Telefon: +36 </li>
-        </ul>
+    <div style={styles.wrapper}>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={styles.videoBackground}
+      >
+        <source
+          src="City_3840_2160_30fps.mp4"
+          type="video/mp4"
+        />
+        A böngésződ nem támogatja a videót.
+      </video>
+  
+      <div style={styles.overlay}>
+        <h1 style={styles.title}>Üdvözöljük a MR Q Electronics-nál!</h1>
+        <div className="col-md-6">
+          <p>
+            A célunk, hogy a legjobb minőségű elektronikai termékeket és szolgáltatásokat nyújtsuk,
+            a versenyautók szerelmeseinek.
+          </p>
+          <ul>
+            <li>Egyedi tervezés</li>
+            <li>Szakmai segítség és szolgáltatás</li>
+            <li>Professzionális megjelenés</li>
+          </ul>
+          <h3 style={styles.title}>Kapcsolat</h3>
+          <p>
+            Ha bármilyen kérdése van, vagy további információt szeretne kapni, ne habozzon kapcsolatba lépni velünk!
+            Itt találja elérhetőségeinket:
+          </p>
+          <ul>
+            <li>Email: info@mrq-electronics.hu</li>
+            <li>Telefon: +36 30 123 4567</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
@@ -29,17 +46,38 @@ function AboutUs() {
 
 // Stílusok
 const styles = {
-  container: {
+  wrapper: {
+    position: "relative",
+    height: "100vh",
+    width: "100vw",
+    overflow: "hidden",
+  },
+  videoBackground: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    minWidth: "100%",
+    minHeight: "100%",
+    objectFit: "cover",
+    zIndex: 0,
+  },
+  overlay: {
+    position: "relative",
+    zIndex: 1,
+    height: "100%",
+    width: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    color: "#fff",
+    padding: "60px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: "80vh",
+    textAlign: "center",
   },
   title: {
-    fontSize: "24px",
+    fontSize: "28px",
     marginBottom: "20px",
-    textAlign: "center",
   },
 };
 

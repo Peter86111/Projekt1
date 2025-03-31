@@ -24,36 +24,73 @@ function Home() {
   }, []);
 
   return (
-    <div style={styles.container} className="bg-dark">
-      <h1 style={styles.title}>Üdvözöljük a MR Q Electronics-nál!</h1>
-      <p>Fedezze fel legújabb termékeinket és szolgáltatásainkat.</p>
-      <div style={styles.title} className="col-md-6">
-        <h3>Miért válasszon minket?</h3>
-        <ul>
-          <li>Professzionális alkatrészek</li>
-          <li>Versenyautókra szabott kinézet</li>
-          <li>Gyors és megbízható szállítás</li>
-        </ul>
+    <div style={styles.wrapper}>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={styles.videoBackground}
+      >
+        <source
+          src="/Tachometer_1920_1080_24fps.mp4"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+  
+      <div style={styles.overlay}>
+        <h1 style={styles.title}>Üdvözöljük a MR Q Electronics-nál!</h1>
+        <p>Fedezze fel legújabb termékeinket és szolgáltatásainkat.</p>
+        <div style={styles.title} className="col-md-6">
+          <h3>Miért válasszon minket?</h3>
+          <ul>
+            <li>Professzionális alkatrészek</li>
+            <li>Versenyautókra szabott kinézet</li>
+            <li>Gyors és megbízható szállítás</li>
+          </ul>
+        </div>
+        <GetRandomProducts products={products} />
       </div>
-      <GetRandomProducts products={products} />
     </div>
   );
 }
 
 // Stílusok
 const styles = {
-  container: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "80vh",
+  wrapper: {
+    position: "relative",
+    height: "100vh",
+    width: "100%",
+    overflow: "hidden",
+  },
+  videoBackground: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    minWidth: "100%",
+    minHeight: "100%",
+    objectFit: "cover",
+    zIndex: 0,
+  },
+  overlay: {
+    position: "relative",
+    zIndex: 1,
+    color: "#fff",
+    textAlign: "center",
+    padding: "50px",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // sötét átlátszó háttér
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
-      fontSize: "24px",
-      marginBottom: "20px",
-      textAlign: "center",
-  }, 
+    fontSize: "24px",
+    marginBottom: "20px",
+    textAlign: "center",
+  },
 };
 
-export default Home;    
+export default Home;

@@ -1,77 +1,21 @@
-import React, { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import * as THREE from "three";
-import NET from "vanta/dist/vanta.net.min";
+import { useAuth } from "../context/AuthContext";
 
-export const Logout = () => {
+const Logout = () => {
   const navigate = useNavigate();
-  const vantaRef = useRef(null);
+  const { setUser } = useAuth();
 
   useEffect(() => {
-    const vantaEffect = NET({
-      el: vantaRef.current,
-      THREE,
-      color: 0xff0000, 
-      backgroundColor: 0x24262b, 
-      points: 12.0,
-      maxDistance: 20.0,
-      spacing: 18.0,
-    });
-
-    return () => {
-      if (vantaEffect) vantaEffect.destroy();
-    };
-  }, []);
-
-  const handleLogout = () => {
+    // Token törlése és user állapot visszaállítása
     localStorage.removeItem("jwt");
-    navigate("/");
-  };
+    setUser(null);
 
-  return (
-    <div ref={vantaRef} style={{ height: "100vh", width: "100%", position: "relative" }}>
-      <div style={styles.container}>
-        <h1 style={styles.title}>Kijelentkezés</h1>
-        <p style={styles.message}>Viszont látásra!</p>
-        <button onClick={handleLogout} style={styles.button}>
-          Kijelentkezés
-        </button>
-      </div>
-    </div>
-  );
-};
+    // Átirányítás pl. főoldalra vagy loginre
+    navigate("/login");
+  }, [setUser, navigate]);
 
-const styles = {
-  container: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    textAlign: "center",
-    backgroundColor: "rgba(255, 255, 255, 0.9)",
-    borderRadius: "15px",
-    padding: "20px 30px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-    width: "300px",
-  },
-  title: {
-    color: "#ff4500",
-    marginBottom: "10px",
-  },
-  message: {
-    color: "#333",
-    fontSize: "16px",
-    marginBottom: "20px",
-  },
-  button: {
-    backgroundColor: "#28a745",
-    color: "white",
-    border: "none",
-    padding: "10px 15px",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontWeight: "bold",
-  },
+  return null; // Nem kell semmit megjelenítenünk
 };
 
 export default Logout;

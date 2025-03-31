@@ -11,10 +11,14 @@ import { Navbar, Nav } from 'react-bootstrap';
 import "./App.css";
 import Production from './components/Production';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Registration } from './components/Registration';
+import { useAuth } from "./context/AuthContext";
 
 function App() {
+  const { user, isAdmin } = useAuth();
+  const { timeLeft } = useAuth();
+
   return (
     <Router>
       {/* Felső navbar */}
@@ -30,10 +34,16 @@ function App() {
             <Nav.Link href="/termekek">Termékek</Nav.Link>
             <Nav.Link href="/szolgaltatasok">Szolgáltatások</Nav.Link>
             <Nav.Link href="/rolunk">Rólunk</Nav.Link>
-            <Nav.Link href="/admin">Admin</Nav.Link>
+            {isAdmin && <Nav.Link href="/admin">Admin</Nav.Link>}
             <Nav.Link href="/registration">Regisztráció</Nav.Link>
             <Nav.Link href="/login">Bejelentkezés</Nav.Link>
-            <Nav.Link href="/logout">Kijelentkezés</Nav.Link>
+            {user && <Nav.Link href="/logout">Kijelentkezés</Nav.Link>}
+            {user && <Nav.Link disabled className="text-light">Üdv {user.user}!</Nav.Link>}
+            {user && (
+              <Nav.Link disabled className="text-warning">
+                Inaktivitási idő: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}
+              </Nav.Link>
+            )}
             <Nav.Link className='topnav-basket' href="#shoppingBasket">
               <img src={basket} width="35" height="35" alt="basket" />
             </Nav.Link>
@@ -47,7 +57,7 @@ function App() {
         <Route path="/termekek" element={<Production />} />
         <Route path="/szolgaltatasok" element={<Services />} />
         <Route path="/rolunk" element={<AboutUs />} />
-        <Route path="/admin/*" element={<AdminDashboard />} />
+        <Route path="/admin/*" element={isAdmin ? <AdminDashboard /> : <Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
