@@ -65,7 +65,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
       </Routes>
-
       {/* Lábléc */}
       <Nav className="bg-dark">
           <footer className="footer bg-dark">
