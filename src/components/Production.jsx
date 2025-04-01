@@ -1,7 +1,9 @@
+import { useCart } from "../context/CartContext";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const ProductBrowser = () => {
+  const { dispatch } = useCart();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [products, setProducts] = useState([]);
@@ -59,6 +61,11 @@ const ProductBrowser = () => {
     }
   };
 
+  // Kosárba helyezés
+  const handleAddToCart = (Product) => {
+    dispatch({ type: "ADD_TO_CART", payload: products });
+  };
+
   return (
     <div className="bg-dark">
       <h1 className="h1-modify bg-dark">Kategóriák</h1>
@@ -85,6 +92,7 @@ const ProductBrowser = () => {
                 <div className="card-body">
                   <p className="card-text">
                     {p.name} - {p.price} Ft
+                    <button className="add-to-cart" onClick={() => handleAddToCart(products)}>Kosárba</button>
                   </p>
                 </div>
               </div>

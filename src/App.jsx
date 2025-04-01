@@ -14,6 +14,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Registration } from './components/Registration';
 import { useAuth } from "./context/AuthContext";
+import Cart from './components/Cart';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   const { user, isAdmin } = useAuth();
@@ -21,6 +23,7 @@ function App() {
 
   return (
     <Router>
+      <CartProvider>
       {/* Felső navbar */}
       <Navbar bg="dark" expand="lg" variant="dark" className="container-fluid">
         <Navbar.Brand href="/">
@@ -30,7 +33,7 @@ function App() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             {/* Fő navigációs linkek */}
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>            
             <Nav.Link href="/termekek">Termékek</Nav.Link>
             <Nav.Link href="/szolgaltatasok">Szolgáltatások</Nav.Link>
             <Nav.Link href="/rolunk">Rólunk</Nav.Link>
@@ -44,8 +47,8 @@ function App() {
                 Inaktivitási idő: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}
               </Nav.Link>
             )}
-            <Nav.Link className='topnav-basket' href="#shoppingBasket">
-              <img src={basket} width="35" height="35" alt="basket" />
+            <Nav.Link className='topnav-basket' href="/cart">
+              <i className="bi bi-cart3 fs-2"></i> 
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -54,6 +57,7 @@ function App() {
       {/* Útvonalak (oldalak) */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />  {/* Kosár oldal */}
         <Route path="/termekek" element={<Production />} />
         <Route path="/szolgaltatasok" element={<Services />} />
         <Route path="/rolunk" element={<AboutUs />} />
@@ -64,52 +68,41 @@ function App() {
       </Routes>
 
       {/* Lábléc */}
-      <footer className="footer bg-dark">
-        <div className="footer-container">
-          <div className="footer-row">
-            <div className="footer-col">
-              <h4>Cégünkről</h4>
-              <ul>
-                <li><a href="#">Rólunk</a></li>
-                <li><a href="#">Szolgáltatásaink</a></li>
-                <li><a href="#">Adatvédelem</a></li>
-                <li><a href="#">Partnerprogram</a></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Segítség</h4>
-              <ul>
-                <li><a href="#">Gyakori kérdések</a></li>
-                <li><a href="#">Szállítás</a></li>
-                <li><a href="#">Visszatérítés</a></li>
-                <li><a href="#">Rendelés állapota</a></li>
-                <li><a href="#">Fizetési lehetőségek</a></li>
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Kövess minket</h4>
-              <div className="social-links">
-                <a
-                  href="https://www.facebook.com/kandomiskolc/reels/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img
-                    className="img-social-kando"
-                    src={kando}
-                    width="50"
-                    height="50"
-                    alt="kando"
-                  />
-                </a>
+      <Nav className="bg-dark">
+          <footer className="footer bg-dark">
+            <div className="footer-container">
+              <div className="footer-row">
+                <div className="footer-col">
+                  <h4>Rólunk</h4>
+                  <ul>
+                    <li><a href="/rolunk">Rólunk</a></li>
+                    <li><a href="/szolgaltatasok">Szolgáltatásaink</a></li>
+                  
+                  </ul>
+                </div>
+                <div className="footer-col">
+                  <h4>Készítők</h4>
+                  <ul>
+                  <li><a href="https://github.com/Peter86111/Projekt1.git"> <i class="bi bi-github"></i> Github</a></li>
+                  <li><a href="/">Molnár Péter és Papp Patrícia</a></li>
+                  </ul>
+                </div>
+                <div className="footer-col">
+                  <h4>Kapcsolódó linkek</h4>
+                  <div className="social-links">
+                    <a href="https://www.facebook.com/kandomiskolc/reels/" target='blank'>
+                      <img className='img-social-kando' src={kando} width="50" height="50" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className='jog'>
+                <p>© Minden jog fenntartva</p>
               </div>
             </div>
-          </div>
-          <div className="jog">
-            <p>© Minden jog fenntartva</p>
-          </div>
-        </div>
-      </footer>
+          </footer>
+        </Nav>
+      </CartProvider>
     </Router>
   );
 }
