@@ -18,7 +18,7 @@ function AddNewProduct(props) {
         price: props.productObj.price || "",
         description: props.productObj.description || "",
         categoryId: props.productObj.categoryId || 1,
-        picture: props.productObj.picture || "", // innen szedjük a kép elérhetőségét
+        picture: props.productObj.picture || "",
       });
     }
   }, [props.productObj]);

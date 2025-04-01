@@ -1,60 +1,53 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function ProductManager() {
-
-  // A létező termékek
+function DeleteProduct() {
   const [products, setProducts] = useState([]);
-
-  // Kategóriák a szűrőhöz (pl. GET /api/Categories)
   const [categories, setCategories] = useState([]);
-  // Kiválasztott kategória ID szűréshez (üres: mindet mutatjuk)
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  // Termékek betöltése
   useEffect(() => {
     fetchProducts();
     fetchCategories();
   }, []);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (categoryId) => {
     try {
-      const response = await axios.get("https://localhost:7012/api/Products");
-      // Pl. { result: [ {id, name, price, categoryId,...}, ... ], message: "..." }
-      setProducts(response.data.result);
+      const url = categoryId
+        ? `https://localhost:7012/api/Products/${categoryId}/products`
+        : "https://localhost:7012/api/Products";
+  
+      const response = await axios.get(url);
+      setProducts(categoryId ? response.data : response.data.result);
     } catch (error) {
       console.error("Hiba a terméklista lekérésekor:", error);
     }
   };
 
-  // Kategóriák betöltése (GET /api/Categories)
   const fetchCategories = async () => {
     try {
-      const catRes = await axios.get("https://localhost:7012/api/Categories");
-      // Tegyük fel, catRes.data = [{ id: 1, categoryName: "Kategória1" }, ...]
-      setCategories(catRes.data);
+      const response = await axios.get("https://localhost:7012/api/Categories");
+      setCategories(response.data);
     } catch (error) {
       console.error("Hiba a kategóriák lekérésekor:", error);
     }
   };
 
-  // Kategória-szűrő változása
-  const handleCategoryFilterChange = (e) => {
-    setSelectedCategory(e.target.value);
+  const handleCategoryFilterChange = async (e) => {
+    const categoryId = e.target.value;
+    setSelectedCategory(categoryId);
+  
+    if (categoryId === "") {
+      await fetchProducts();
+    } else {
+      await fetchProducts(Number(categoryId));
+    }
   };
 
-  // Szűrés logika: ha selectedCategory üres, minden terméket mutatunk,
-  // ha van benne valami, akkor p.categoryId === selectedCategory
-  const filteredProducts = selectedCategory
-    ? products.filter((p) => p.categoryId === Number(selectedCategory))
-    : products; 
-
-  // Törlés (DELETE)
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://localhost:7012/api/Products?id=${id}`);
-      // Sikeres törlés után lista frissítése
-      fetchProducts();
+      fetchProducts(selectedCategory);
     } catch (error) {
       console.error("Hiba a termék törlésekor:", error);
     }
@@ -62,7 +55,6 @@ function ProductManager() {
 
   return (
     <div style={styles.mainContainer}>
-      {/* KATEGÓRIA SZŰRŐ */}
       <div style={styles.filterContainer}>
         <label>Kategória szűrő: </label>
         <select value={selectedCategory} onChange={handleCategoryFilterChange}>
@@ -75,21 +67,15 @@ function ProductManager() {
         </select>
       </div>
 
-      {/* KÁRTYÁK – Szűrt terméklista */}
       <div style={styles.cardList}>
-        {filteredProducts.map((p) => (
+        {products.map((p) => (
           <div key={p.id} style={styles.card}>
-            {/* Ha p.picture létezik, megjelenítjük */}
-            {p.picture && (
-              <img src={p.picture} alt={p.name} style={styles.cardImage} />
-            )}
+            {p.picture && <img src={p.picture} alt={p.name} style={styles.cardImage} />}
             <div style={styles.cardBody}>
-              <h3 style={styles.cardTitle}>{p.name}</h3>
-              <p style={styles.cardText}>{p.description}</p>
-              <p style={styles.cardText}>{p.price} Ft</p>
-              <button style={styles.deleteButton} onClick={() => handleDelete(p.id)}>
-                Törlés
-              </button>
+              <h3>{p.name}</h3>
+              <p>{p.description}</p>
+              <p>{p.price} Ft</p>
+              <button style={styles.deleteButton} onClick={() => handleDelete(p.id)}>Törlés</button>
             </div>
           </div>
         ))}
@@ -147,4 +133,4 @@ const styles = {
   },
 };
 
-export default ProductManager;
+export default DeleteProduct;
