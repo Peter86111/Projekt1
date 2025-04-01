@@ -155,6 +155,151 @@ select {
   font-family: "Anta", sans-serif;
 }
 
+/*Kosár*/
+.btn-custom-red{
+  background-color: transparent; /* Transparent background */
+  color: #000000; /* Text color (can be any color you want) */
+  font-size: 12px; /* Font size */
+  padding: 5px 5px; /* Padding around the text */
+  border:none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* gomb hover piros */
+.btn-custom-red:hover {
+  background-color: #fc7b7b; /* Background color on hover */
+  color: white; /* Text color on hover */
+
+}
+.btn-custom-green{
+  background-color: transparent; /* Transparent background */
+  color: #000000; /* Text color (can be any color you want) */
+  font-size: 12px; /* Font size */
+  padding: 5px 5px; /* Padding around the text */
+  border:none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* gomb hover zöld */
+.btn-custom-green:hover {
+  background-color: #7bfc90; /* Background color on hover */
+  color: white; /* Text color on hover */
+
+}
+.box {
+  display: flex;
+  align-items:normal;
+  justify-content: space-between; /* Elemek közötti egyenlő távolság */
+  padding: 10px;
+  border: 1px solid #989393;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  gap: 20px; /* Távolság az elemek között */
+}
+
+/* Bal oldal: Terméknév és ár */
+.product-info {
+  display: flex;           /* Vízszintes elrendezés */
+  align-items: center;     /* Középre igazítja a terméket és az árat */
+  gap: 10px;               /* Kisebb távolság a név és az ár között */
+}
+
+.product-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.product-price {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Középen: Mennyiség */
+.quantity-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-left: 0;   /* Nincs eltolás, hogy középen maradjon */
+}
+
+.quantity-value {
+  min-width: 35px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Jobb oldal: Kuka gomb */
+.trash-button {
+  margin-left: auto;
+  padding: 5px 10px;
+}
+/*színek: #27cc0e zöld, #fe0000 piros */
+
+/* About us */
+.container {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: white;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.section-container {
+  display: flex;
+  flex-direction:inherit;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+.section {
+  flex: 2;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(183, 50, 50, 0.5);
+  margin: 10px;
+  color: black;
+}
+
+
+
+.product-info {
+  padding: 10px;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.product-description {
+  font-size: 14px;
+  color: #666;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #d32f2f;
+  margin-top: 10px;
+  display: block;
+}
 /*kosrába gomb*/
 .add-to-cart {
     background-color: #233242;

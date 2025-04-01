@@ -5,7 +5,6 @@ import Home from './components/Home';
 import Services from './components/Services';
 import AboutUs from './components/AboutUs';
 import logo from './mr_q_mod.png';
-import basket from './cart.svg';
 import kando from './kando.jpg';
 import { Navbar, Nav } from 'react-bootstrap';
 import "./App.css";
