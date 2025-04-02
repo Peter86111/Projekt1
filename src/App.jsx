@@ -81,8 +81,8 @@ function App() {
                 <div className="footer-col">
                   <h4>Készítők</h4>
                   <ul>
-                  <li><a href="https://github.com/Peter86111/Projekt1.git"> <i class="bi bi-github"></i> Github</a></li>
-                  <li><a href="/">Molnár Péter és Papp Patrícia</a></li>
+                  <li><a href="https://github.com/Peter86111/Projekt1.git" target='blank'> <i class="bi bi-github"></i> Github</a></li>
+                  <li><a href="/">Papp Patrícia & Molnár Péter</a></li>
                   </ul>
                 </div>
                 <div className="footer-col">

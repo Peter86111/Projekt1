@@ -9,85 +9,100 @@ export default function AdminDashboard() {
   const { isAdmin } = useAuth();
 
   if (!isAdmin) {
-    return <Navigate to="/" replace />; // Visszairányítás főoldalra
+    return <Navigate to="/" replace />;
   }
 
   return (
-    <div className="bg-dark" style={styles.container}>
-      <h2 style={styles.title}>Admin Dashboard</h2>
+    <div style={styles.background}>
+      <div style={styles.overlay}></div>
+      <div style={styles.container}>
+        <h2 style={styles.title}>Admin Dashboard</h2>
 
-      {/* Itt csinálunk egy mini-menüt a 3 funkcióhoz */}
-      <nav style={{ marginBottom: "15px" }}>
-        <Link to="/admin/create" style={{ marginRight: "10px" }}>
-          Új termék felvétele
-        </Link>
-        <Link to="/admin/update" style={{ marginRight: "10px" }}>
-          Termék módosítása
-        </Link>
-        <Link to="/admin/delete" style={{ marginRight: "10px" }}>
-          Termék törlése
-        </Link>
-      </nav>
+        <nav style={styles.nav}>
+          <Link to="/admin/create" style={styles.navLink}>
+            Új termék felvétele
+          </Link>
+          <Link to="/admin/update" style={styles.navLink}>
+            Termék módosítása
+          </Link>
+          <Link to="/admin/delete" style={styles.navLink}>
+            Termék törlése
+          </Link>
+        </nav>
 
-      {/* Nested Routes - a "create", "update", "delete" útvonalakat itt kezeljük */}
-      <Routes>
-        {/* Ha csak /admin a path, pl. Admin főoldal */}
-        <Route
-          path=""
-          element={<p>Kérlek válassz az Admin menüből!</p>}
-        />
-
-        {/* Ha /admin/create */}
-        <Route path="create" element={<AddNewProduct />} />
-
-        {/* Ha /admin/update */}
-        <Route path="update" element={<UpdateProduct />} />
-
-        {/* Ha /admin/delete */}
-        <Route path="delete" element={<DeleteProduct />} />
-      </Routes>
+        <div style={styles.content}>
+          <Routes>
+            <Route path="" element={<p style={styles.placeholder}>Kérlek válassz az Admin menüből!</p>} />
+            <Route path="create" element={<AddNewProduct />} />
+            <Route path="update" element={<UpdateProduct />} />
+            <Route path="delete" element={<DeleteProduct />} />
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 }
 
-// Stílusok
+// 💅 Modern sötét háttér, világos kártya, háttér effekt
 const styles = {
-  container: {
+  background: {
+    position: "relative",
+    minHeight: "100vh",
+    backgroundColor: "#121212", // főoldal háttér
+    overflow: "hidden",
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: "80vh",
+    padding: "40px 20px",
+  },
+  overlay: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    background: "radial-gradient(circle at 30% 30%, rgba(0, 123, 255, 0.15), transparent), radial-gradient(circle at 70% 70%, rgba(255, 0, 150, 0.1), transparent)",
+    backdropFilter: "blur(6px)",
+    zIndex: 0,
+  },
+  container: {
+    position: "relative",
+    zIndex: 1,
+    maxWidth: "800px",
+    width: "100%",
+    backgroundColor: "#1e1e1e", // egyedi sötét háttér csak a dashboard-nak
+    borderRadius: "12px",
+    padding: "30px",
+    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    color: "#f1f1f1",
   },
   title: {
-    fontSize: "24px",
-    marginBottom: "20px",
+    fontSize: "28px",
+    fontWeight: "600",
+    color: "#ffffff",
     textAlign: "center",
+    marginBottom: "30px",
   },
-  inputGroup: {
+  nav: {
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginBottom: "15px",
+    justifyContent: "center",
+    gap: "15px",
+    marginBottom: "30px",
+    flexWrap: "wrap",
   },
-  label: {
-    marginBottom: "5px",
-  },
-  input: {
-    padding: "8px",
-    fontSize: "16px",
-    width: "250px",
-  },
-  button: {
-    display: "block",
-    margin: "0 auto",
+  navLink: {
     padding: "10px 20px",
+    backgroundColor: "#333",
+    color: "#fff",
+    textDecoration: "none",
+    borderRadius: "8px",
     fontSize: "16px",
-    cursor: "pointer",
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
+    transition: "all 0.3s ease",
+  },
+  content: {
     textAlign: "center",
+  },
+  placeholder: {
+    color: "#aaa",
+    fontStyle: "italic",
   },
 };

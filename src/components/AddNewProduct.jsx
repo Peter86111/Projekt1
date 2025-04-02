@@ -6,12 +6,15 @@ function AddNewProduct(props) {
     name: "",
     price: "",
     description: "",
-    categoryId: 1, // default 1
-    picture: "",   // kép URL
+    categoryId: 1,
+    picture: "",
   });
 
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
-    // Ha jön termékobjektum, akkor feltöltjük az állapotot
     if (props.productObj) {
       setProductData({
         name: props.productObj.name || "",
@@ -23,18 +26,41 @@ function AddNewProduct(props) {
     }
   }, [props.productObj]);
 
-  // Mezők változása
   const handleChange = (event) => {
     const { name, value } = event.target;
     setProductData((prev) => ({
       ...prev,
       [name]: name === "categoryId" ? Number(value) : value,
     }));
+
+    // Hibát eltávolítjuk ha újra írja a mezőt
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
-  // Új termék létrehozása (POST)
+  const validate = () => {
+    const newErrors = {};
+    if (!productData.name) newErrors.name = "Név kötelező";
+    if (!productData.price || productData.price <= 0) newErrors.price = "Pozitív ár szükséges";
+    if (!productData.description) newErrors.description = "Leírás kötelező";
+    if (!productData.picture) newErrors.picture = "Kép URL kötelező";
+    if (!productData.categoryId || productData.categoryId < 1) newErrors.categoryId = "Érvényes kategória ID kell";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
+
+    if (!validate()) {
+      setErrorMessage("Kérlek töltsd ki a mezőket helyesen.");
+      setSuccessMessage("");
+      return;
+    }
+
     const url = "https://localhost:7012/api/Products";
 
     try {
@@ -45,78 +71,42 @@ function AddNewProduct(props) {
       });
 
       if (response.status === 201) {
-        // Sikeres POST
         props.handleCount?.();
-        console.log(response.data.message); // "Sikeres felvétel." (vagy amit a backend küld)
+        setSuccessMessage("Sikeresen mentve ✅");
+        setErrorMessage("");
+        setProductData({
+          name: "",
+          price: "",
+          description: "",
+          categoryId: 1,
+          picture: "",
+        });
+        setErrors({});
       } else {
-        console.log("Hiba: váratlan státuszkód", response.status);
+        setErrorMessage("Mentés nem sikerült ❌");
+        setSuccessMessage("");
       }
     } catch (error) {
       console.error("Axios POST hiba:", error);
+      setErrorMessage("Szerverhiba történt ❌");
+      setSuccessMessage("");
     }
   };
 
   return (
-    <div className="bg-dark" style={styles.container}>
-      <h1 className="h1-admin" style={styles.title}>
-        <label>Új termék felvétele:</label>
-      </h1>
+    <div style={styles.container}>
+      <h1 style={styles.title}>Új termék felvétele</h1>
+
+      {successMessage && <p style={{ color: "limegreen" }}>{successMessage}</p>}
+      {errorMessage && <p style={{ color: "crimson" }}>{errorMessage}</p>}
+
       <form onSubmit={handleSubmit}>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Termék neve:</label>
-          <input
-            type="text"
-            name="name"
-            value={productData.name}
-            onChange={handleChange}
-            placeholder="Termék neve"
-            style={styles.input}
-          />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Ár:</label>
-          <input
-            type="number"
-            name="price"
-            value={productData.price}
-            onChange={handleChange}
-            placeholder="Termék ára"
-            style={styles.input}
-          />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Leírás:</label>
-          <input
-            type="text"
-            name="description"
-            value={productData.description}
-            onChange={handleChange}
-            placeholder="Termék leírása"
-            style={styles.input}
-          />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Kategória (ID):</label>
-          <input
-            type="number"
-            name="categoryId"
-            value={productData.categoryId}
-            onChange={handleChange}
-            placeholder="Termék kategória azonosítója"
-            style={styles.input}
-          />
-        </div>
-        <div style={styles.inputGroup}>
-          <label style={styles.label}>Kép (URL):</label>
-          <input
-            type="text"
-            name="picture"
-            value={productData.picture}
-            onChange={handleChange}
-            placeholder="Kép URL-címe"
-            style={styles.input}
-          />
-        </div>
+        {renderInput("name", "Termék neve:", "text", productData.name, errors, handleChange)}
+        {renderInput("price", "Ár:", "number", productData.price, errors, handleChange)}
+        {renderInput("description", "Leírás:", "text", productData.description, errors, handleChange)}
+        {renderInput("categoryId", "Kategória (ID):", "number", productData.categoryId, errors, handleChange)}
+        {renderInput("picture", "Kép (URL):", "text", productData.picture, errors, handleChange)}
+
         <button style={styles.button} type="submit">
           Új termék mentése
         </button>
@@ -125,45 +115,69 @@ function AddNewProduct(props) {
   );
 }
 
-// Stílusok
+// 🧩 Új segédfüggvény: input render + hiba
+function renderInput(name, label, type, value, errors, handleChange) {
+  return (
+    <div style={styles.inputGroup}>
+      <label style={styles.label}>{label}</label>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        placeholder={label}
+        style={{
+          ...styles.input,
+          borderColor: errors[name] ? "crimson" : "#ccc",
+          borderWidth: "1px",
+          borderStyle: "solid",
+        }}
+      />
+      {errors[name] && <span style={{ color: "crimson", fontSize: "14px" }}>{errors[name]}</span>}
+    </div>
+  );
+}
+
 const styles = {
   container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "80vh",
+    maxWidth: "600px",
+    margin: "auto",
+    padding: "30px",
+    borderRadius: "10px",
+    backgroundColor: "#1e1e1e",
+    color: "#f1f1f1",
+    boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
   },
   title: {
-    fontSize: "24px",
-    marginBottom: "20px",
     textAlign: "center",
+    marginBottom: "20px",
+    fontSize: "26px",
   },
   inputGroup: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     marginBottom: "15px",
   },
   label: {
     marginBottom: "5px",
   },
   input: {
-    padding: "8px",
+    padding: "10px",
     fontSize: "16px",
-    width: "250px",
+    borderRadius: "4px",
+    outline: "none",
+    backgroundColor: "#f9f9f9",
+    color: "#333",
   },
   button: {
-    display: "block",
-    margin: "0 auto",
     padding: "10px 20px",
     fontSize: "16px",
-    cursor: "pointer",
     backgroundColor: "#007bff",
     color: "white",
     border: "none",
-    borderRadius: "5px",
-    textAlign: "center",
+    borderRadius: "6px",
+    cursor: "pointer",
+    marginTop: "10px",
   },
 };
 
