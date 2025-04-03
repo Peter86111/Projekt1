@@ -316,7 +316,6 @@ ul {
 .btn-custom-green:hover {
   background-color: #7bfc90; /* Background color on hover */
   color: white; /* Text color on hover */
-
 }
 .box {
   display: flex;

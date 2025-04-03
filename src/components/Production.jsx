@@ -62,8 +62,8 @@ const ProductBrowser = () => {
   };
 
   // Kosárba helyezés
-  const handleAddToCart = (Product) => {
-    dispatch({ type: "ADD_TO_CART", payload: products });
+  const handleAddToCart = (product) => {
+    dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
   return (
@@ -83,24 +83,22 @@ const ProductBrowser = () => {
       </select>
 
       {/* TERMÉKLISTA */}
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 bg-dark">
-        {products && products.length > 0 ? (
-          products.map((p) => (
-            <div className="col bg-dark border-line-red" key={p.id}>
-              <div className="card shadow-sm">
-                <img className="img-products" src={p.picture} alt="product" />
-                <div className="card-body">
-                  <p className="card-text">
-                    {p.name} - {p.price} Ft
-                    <button className="add-to-cart" onClick={() => handleAddToCart(products)}>Kosárba</button>
-                  </p>
-                </div>
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 bg-dark">
+        {products.map((product) => (
+          <div className="col" key={product.id}>
+            <div className="card product-card">
+              <img src={product.picture} alt={product.name} />
+              <div className="card-body">
+                <h5>{product.name}</h5>
+                <p>{product.price} Ft</p>
+                <button className= "add-to-cart"onClick={() => handleAddToCart(product)}>Kosárba</button>
+    </div>
               </div>
             </div>
           ))
-        ) : (
+}) : (
           <p className="no-products">Nincsenek elérhető termékek</p>
-        )}
+        )
       </div>
     </div>
   );
