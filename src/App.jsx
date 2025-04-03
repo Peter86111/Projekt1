@@ -15,6 +15,7 @@ import { Registration } from './components/Registration';
 import { useAuth } from "./context/AuthContext";
 import Cart from './components/Cart';
 import { CartProvider } from './context/CartContext';
+import { jwtDecode } from "jwt-decode";
 
 function App() {
   const { user, isAdmin } = useAuth();
@@ -40,7 +41,7 @@ function App() {
             <Nav.Link href="/registration">Regisztráció</Nav.Link>
             <Nav.Link href="/login">Bejelentkezés</Nav.Link>
             {user && <Nav.Link href="/logout">Kijelentkezés</Nav.Link>}
-            {user && <Nav.Link disabled className="text-light">Üdv {user.user}!</Nav.Link>}
+            {user && <Nav.Link disabled className="text-light">Üdv, {jwtDecode(localStorage.getItem("jwt")).name}<br/>{jwtDecode(localStorage.getItem("jwt")).role}!</Nav.Link>}
             {user && (
               <Nav.Link disabled className="text-warning">
                 Inaktivitási idő: {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}
