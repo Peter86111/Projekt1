@@ -70,8 +70,14 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(state.cart));
   }, [state.cart]);
 
+  // Kosár törlése, localStorage-ban is
+  const clearCartStorage = () => {
+    localStorage.removeItem("cart"); // Törlés a localStorage-ból
+    dispatch({ type: "CLEAR_CART" }); // Törlés az állapotból
+  };
+
   return (
-    <CartContext.Provider value={{ cart: state.cart, dispatch }}>
+    <CartContext.Provider value={{ cart: state.cart, dispatch, clearCartStorage }}>
       {children}
     </CartContext.Provider>
   );

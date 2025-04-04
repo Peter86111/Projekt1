@@ -15,10 +15,14 @@ const Cart = () => {
   const handleRemoveFromCart = (productId) => {
     dispatch({ type: "REMOVE_FROM_CART", payload: productId });
   };
-
   const handleClearCart = () => {
+    // Törlés a localStorage-ból
+    localStorage.removeItem("cart");
+  
+    // Kosár ürítése az állapotból
     dispatch({ type: "CLEAR_CART" });
   };
+  
 
   const handleOrder = () => {
     if (cart.length === 0) {

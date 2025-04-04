@@ -4,6 +4,7 @@ import Logout from './components/Logout';
 import Home from './components/Home';
 import Services from './components/Services';
 import AboutUs from './components/AboutUs';
+import ProductSinglePage from './components/ProductSinglePage';
 import logo from './mr_q_mod.png';
 import kando from './kando.jpg';
 import { Navbar, Nav } from 'react-bootstrap';
@@ -59,6 +60,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />  {/* Kosár oldal */}
         <Route path="/termekek" element={<Production />} />
+        <Route path="/product/:productId" element={<ProductSinglePage />} />
         <Route path="/szolgaltatasok" element={<Services />} />
         <Route path="/rolunk" element={<AboutUs />} />
         <Route path="/admin/*" element={isAdmin ? <AdminDashboard /> : <Login />} />

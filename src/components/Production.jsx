@@ -1,6 +1,7 @@
 import { useCart } from "../context/CartContext";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ProductBrowser = () => {
   const { dispatch } = useCart();
@@ -8,10 +9,15 @@ const ProductBrowser = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [products, setProducts] = useState([]);
 
-  // 1. Kategóriák lekérése
+  // Inside the component
+  const navigate = useNavigate();
+  
+  // Remove the redundant definition of handleProductClick
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   useEffect(() => {
-    // a useEffect callback NEM async,
-    // belül definiálunk és hívunk egy aszinkron függvényt:
     const fetchCategories = async () => {
       try {
         const response = await axios.get("https://localhost:7012/api/Categories");
@@ -23,7 +29,6 @@ const ProductBrowser = () => {
     fetchCategories();
   }, []);
 
-  // 2. Alapértelmezésben MINDEN termék lekérése
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
@@ -36,12 +41,10 @@ const ProductBrowser = () => {
     fetchAllProducts();
   }, []);
 
-  // Ha a user változtatja a kategóriát
   const handleCategoryChange = async (categoryId) => {
     setSelectedCategory(categoryId);
 
     if (!categoryId) {
-      // Ha üres (pl. "Válassz...") => újra a teljes lista
       try {
         const allResponse = await axios.get("https://localhost:7012/api/Products");
         setProducts(allResponse.data.result);
@@ -49,7 +52,6 @@ const ProductBrowser = () => {
         console.error("Hiba az adatok lekérésekor: ", error);
       }
     } else {
-      // Lekérjük a kiválasztott kategória termékeit
       try {
         const response = await axios.get(
           `https://localhost:7012/api/Products/${categoryId}/products`
@@ -61,7 +63,6 @@ const ProductBrowser = () => {
     }
   };
 
-  // Kosárba helyezés
   const handleAddToCart = (product) => {
     dispatch({ type: "ADD_TO_CART", payload: product });
   };
@@ -82,23 +83,26 @@ const ProductBrowser = () => {
         ))}
       </select>
 
-      {/* TERMÉKLISTA */}
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 bg-dark">
         {products.map((product) => (
           <div className="col" key={product.id}>
             <div className="card product-card">
-              <img src={product.picture} alt={product.name} />
+              <img
+                src={product.picture}
+                alt={product.name}
+                className="cursor-pointer"
+                onClick={() => handleProductClick(product.id)}  // Navigating to product details page
+              />
               <div className="card-body">
                 <h5>{product.name}</h5>
                 <p>{product.price} Ft</p>
-                <button className= "add-to-cart"onClick={() => handleAddToCart(product)}>Kosárba</button>
-    </div>
+                <button className="add-to-cart" onClick={() => handleAddToCart(product)}>
+                  Kosárba
+                </button>
               </div>
             </div>
-          ))
-}) : (
-          <p className="no-products">Nincsenek elérhető termékek</p>
-        )
+          </div>
+        ))}
       </div>
     </div>
   );
