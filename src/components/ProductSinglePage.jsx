@@ -3,9 +3,9 @@ import { useParams, NavLink } from 'react-router-dom';
 import { useCart } from '../context/CartContext'; // Kosár kezelése
 
 const ProductSinglePage = () => {
-    const { dispatch } = useCart(); // Kosárba történő hozzáadás funkció
+    const { dispatch } = useCart();
     const params = useParams();
-    const id = params.productId; // URL paraméterből a 'productId'
+    const id = params.productId;
     const [product, setProduct] = useState(null);
     const [isPending, setPending] = useState(true);
 
@@ -15,7 +15,7 @@ const ProductSinglePage = () => {
             try {
                 const res = await fetch(`https://localhost:7012/api/Products/ById?id=${id}`);
                 const productData = await res.json();
-                setProduct(productData.result); // A termék adatainak beállítása
+                setProduct(productData.result);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -24,7 +24,6 @@ const ProductSinglePage = () => {
         })();
     }, [id]);
 
-    // Kosárba helyezés funkció
     const handleAddToCart = () => {
         if (product) {
             dispatch({ type: "ADD_TO_CART", payload: product });
@@ -32,38 +31,42 @@ const ProductSinglePage = () => {
     };
 
     return (
-        <div className="container p-5 m-auto text-center bg-light shadow-lg rounded">
+        <div className="container-fluid p-5 text-center bg-dark text-light shadow-lg rounded" style={{ minHeight: "100vh" }}>
             {isPending || !product ? (
-                <div className="spinner-border text-primary" role="status">
+                <div className="spinner-border text-light" role="status">
                     <span className="sr-only">Loading...</span>
                 </div>
             ) : (
-                    <div className="card-body">
-  <div className="row">
-    <div className="col-md-6 d-flex justify-content-center align-items-center">
-      <img
-        src={product.picture}
-        alt={product.name}
-        className="img-fluid rounded shadow-sm"
-        style={{ maxHeight: 350, objectFit: 'contain' }}
-      />
-    </div>
-    <div className="col-md-6 d-flex flex-column justify-content-center">
-    <h4 className="card-title text-dark mt-2">{product.name}</h4>
-      <p className="lead text-muted">Ár: {product.price} Ft</p>
-      <p className="text-secondary">{product.description}</p>
-      <div className="mt-3">
-        <button 
-          className="add-to-cart"
-          onClick={() => handleAddToCart(product)} >
-          Kosárba
-        </button>
-      </div>
-    </div>
-    </div>
-            
-                    <div className="card-footer text-muted mt-4">
-                        <NavLink to="/termekek" className="btn btn-secondary">
+                <div className="card-body bg-dark text-light rounded mx-auto" style={{ maxWidth: "1400px" }}>
+                    <div className="row w-100 px-4 mx-auto">
+                        <div className="col-md-6 d-flex justify-content-center align-items-center mb-4">
+                            <img
+                                src={product.picture}
+                                alt={product.name}
+                                className="img-fluid rounded shadow-sm"
+                                style={{ maxHeight: 400, objectFit: 'contain', width: '100%' }}
+                            />
+                        </div>
+                        <div className="col-md-6 d-flex flex-column justify-content-center">
+                            <h4 className="card-title text-light mt-2">{product.name}</h4>
+                            <p className="lead text-light">Ár: {product.price} Ft</p>
+                            <p className="text-light">{product.description}</p>
+                            <div className="mt-3">
+                                <button 
+                                    className="btn btn-outline-light"
+                                    onClick={() => handleAddToCart(product)} >
+                                    Kosárba
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Elválasztó vonal */}
+                    <div className="card-footer mt-4 border-top border-secondary bg-dark"></div>
+
+                    {/* Vissza gomb a vonal alatt */}
+                    <div className="text-center mt-3">
+                        <NavLink to="/termekek" className="btn btn-outline-light">
                             <i className="bi bi-arrow-left-circle"></i> Vissza
                         </NavLink>
                     </div>
@@ -74,5 +77,3 @@ const ProductSinglePage = () => {
 };
 
 export default ProductSinglePage;
-
-

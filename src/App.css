@@ -403,8 +403,6 @@ ul {
   color: black;
 }
 
-
-
 .product-info {
   padding: 10px;
 }
@@ -513,4 +511,10 @@ li:hover {
 .swiper-pagination-bullet-active {
   background-color:#130232; /* Aktív pötty színe */
   transform: scale(1.2); /* Aktív pötty nagyobb méretben */
+}
+
+.card-body, .card-footer {
+  background-color: #212529 !important; /* Bootstrap sötét háttér */
+  color: white !important;
+  border: none !important;
 }
