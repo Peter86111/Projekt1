@@ -580,17 +580,19 @@ li:hover {
   color: #dddddd !important;
   font-weight: 500;
   padding: 10px 16px;
-  margin-right: 20px;
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease;
   font-size: 1rem;
   letter-spacing: 0.5px;
+
+  /* Fontos: fix height + no position shift */
+  border-bottom: 2px solid transparent;
 }
 
 .custom-nav .nav-link:hover {
   background-color: #495057;
   color: #ffffff !important;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid #27cc0e;
 }
 
 .user-info {
@@ -628,11 +630,15 @@ li:hover {
 /* Animált stílus a bejelentkezés és regisztráció linkekhez */
 .auth-link {
   position: relative;
-  color: #cccccc !important;
+  color: #dddddd !important;
   font-weight: 500;
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border-radius: 8px;
   transition: all 0.3s ease;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  text-align: center;
 }
 
 /* Aláhúzás hover-re finoman */
@@ -640,22 +646,22 @@ li:hover {
   content: '';
   position: absolute;
   left: 10%;
-  bottom: 4px;
-  width: 0;
+  right: 10%;
+  bottom: 6px;
   height: 2px;
-  background-color: #27cc0e;
-  transition: width 0.3s ease;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
 }
 
 .auth-link:hover::after {
-  width: 80%;
+  background-color: #27cc0e;
 }
 
 /* Halvány fény-effekt hover-re */
 .auth-link:hover {
-  background-color: #2e2e2e;
+  background-color: #495057;
   color: #ffffff !important;
-  box-shadow: 0 0 6px rgba(39, 204, 14, 0.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
 }
 
 .auth-link.active {
@@ -664,4 +670,12 @@ li:hover {
 
 .custom-nav {
   gap: 1.5rem;
+}
+
+/* Mobil nézetben ne legyen túl nagy a logo */
+@media (max-width: 576px) {
+  .navbar-brand img {
+    width: 150px;
+    height: auto;
+  }
 }

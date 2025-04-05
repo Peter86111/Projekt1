@@ -9,15 +9,16 @@ const NavbarWithCart = ({ user, isAdmin, timeLeft }) => {
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <Navbar bg="dark" expand="lg" variant="dark" className="container-fluid shadow-sm py-3 px-4">
+    <Navbar bg="dark" expand="lg" variant="dark" className="container-fluid shadow-sm py-3 px-3">
       <Navbar.Brand href="/">
-        <img src={logo} width="238" height="100" alt="Logo" />
+        <img src={logo} width="200" height="80" alt="Logo" />
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav" className="justify-content-between w-100">
 
-        {/* KÖZÉPRE IGAZÍTOTT MENÜPONTOK */}
-        <Nav className="mx-auto gap-3 main-menu custom-nav">
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav" className="w-100 d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center">
+
+        {/* KÖZÉPSŐ MENÜ – középre igazítva nagy kijelzőn */}
+        <Nav className="w-100 justify-content-center flex-wrap gap-3 custom-nav my-3 my-lg-0">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/termekek">Termékek</Nav.Link>
           <Nav.Link href="/szolgaltatasok">Szolgáltatások</Nav.Link>
@@ -25,11 +26,11 @@ const NavbarWithCart = ({ user, isAdmin, timeLeft }) => {
           {isAdmin && <Nav.Link href="/admin">Admin</Nav.Link>}
         </Nav>
 
-        {/* JOBB OLDAL: Regisztráció/Login/Kijelentkezés/Kosár */}
-        <Nav className="ms-auto gap-3 align-items-center">
-        {!user && <Nav.Link href="/registration" className="auth-link">Regisztráció</Nav.Link>}
-        {!user && <Nav.Link href="/login" className="auth-link">Bejelentkezés</Nav.Link>}
-        {user && <Nav.Link href="/logout" className="auth-link">Kijelentkezés</Nav.Link>}
+        {/* JOBB OLDAL */}
+        <Nav className="d-flex flex-column flex-lg-row align-items-center text-center gap-3">
+          {!user && <Nav.Link href="/registration" className="auth-link">Regisztráció</Nav.Link>}
+          {!user && <Nav.Link href="/login" className="auth-link">Bejelentkezés</Nav.Link>}
+          {user && <Nav.Link href="/logout" className="auth-link">Kijelentkezés</Nav.Link>}
 
           {user && (
             <Nav.Link disabled className="text-light user-info">
