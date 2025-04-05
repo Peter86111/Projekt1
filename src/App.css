@@ -575,3 +575,93 @@ li:hover {
 .product-card:hover {
   transform: scale(1.02);
 }
+
+.custom-nav .nav-link {
+  color: #dddddd !important;
+  font-weight: 500;
+  padding: 10px 16px;
+  margin-right: 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.custom-nav .nav-link:hover {
+  background-color: #495057;
+  color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+  font-size: 0.85rem;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.cart-link {
+  font-weight: 500;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+/* Középre igazított menü */
+.main-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Animált stílus a bejelentkezés és regisztráció linkekhez */
+.auth-link {
+  position: relative;
+  color: #cccccc !important;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Aláhúzás hover-re finoman */
+.auth-link::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background-color: #27cc0e;
+  transition: width 0.3s ease;
+}
+
+.auth-link:hover::after {
+  width: 80%;
+}
+
+/* Halvány fény-effekt hover-re */
+.auth-link:hover {
+  background-color: #2e2e2e;
+  color: #ffffff !important;
+  box-shadow: 0 0 6px rgba(39, 204, 14, 0.2);
+}
+
+.auth-link.active {
+  border-bottom: 2px solid #27cc0e;
+}
+
+.custom-nav {
+  gap: 1.5rem;
+}
