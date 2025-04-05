@@ -11,7 +11,7 @@ const ProductBrowser = () => {
 
   // Inside the component
   const navigate = useNavigate();
-  
+
   // Remove the redundant definition of handleProductClick
   const handleProductClick = (productId) => {
     navigate(`/product/${productId}`);
@@ -87,12 +87,13 @@ const ProductBrowser = () => {
         {products.map((product) => (
           <div className="col" key={product.id}>
             <div className="card product-card">
-              <img
-                src={product.picture}
-                alt={product.name}
-                className="cursor-pointer"
-                onClick={() => handleProductClick(product.id)}  // Navigating to product details page
-              />
+              <div className="product-image-container">
+                <img
+                  src={product.picture}
+                  alt={product.name}
+                  onClick={() => handleProductClick(product.id)}
+                />
+              </div>
               <div className="card-body">
                 <h5>{product.name}</h5>
                 <p>{product.price} Ft</p>
