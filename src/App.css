@@ -450,26 +450,7 @@ ul {
   padding: 16px;
 }
 
-/* A Swiper konténer */
-.swiper-container {
-  width: 100%;
-  height: 100%;
-}
 
-/* A képek egyformák lesznek */
-.carousel-image {
-  width: 100%; /* Teljes szélesség */
-  height: 400px; /* Fix magasság */
-  object-fit: cover; /* A képek kitöltik a teret, arányosan */
-  border-radius: 12px; /* Lekerekített sarkok */
-}
-
-/* A SwiperSlide középre igazítása */
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 /* home lista hover*/
 ul {
   list-style-type: none; /* Töröljük a lista pontokat */
@@ -575,107 +556,12 @@ li:hover {
 .product-card:hover {
   transform: scale(1.02);
 }
-
-.custom-nav .nav-link {
-  color: #dddddd !important;
-  font-weight: 500;
-  padding: 10px 16px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-
-  /* Fontos: fix height + no position shift */
-  border-bottom: 2px solid transparent;
+/* Hover effektus a címekhez */
+.service-title {
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.custom-nav .nav-link:hover {
-  background-color: #495057;
-  color: #ffffff !important;
-  border-bottom: 2px solid #27cc0e;
-}
-
-.user-info {
-  font-size: 0.85rem;
-  line-height: 1.2;
-  text-align: left;
-}
-
-.cart-link {
-  font-weight: 500;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-}
-
-.cart-badge {
-  position: absolute;
-  top: -5px;
-  right: -10px;
-  background-color: #dc3545;
-  color: white;
-  font-size: 0.75rem;
-  padding: 2px 6px;
-  border-radius: 50%;
-  line-height: 1;
-}
-
-/* Középre igazított menü */
-.main-menu {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* Animált stílus a bejelentkezés és regisztráció linkekhez */
-.auth-link {
-  position: relative;
-  color: #dddddd !important;
-  font-weight: 500;
-  padding: 10px 16px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  display: inline-block;
-  text-align: center;
-}
-
-/* Aláhúzás hover-re finoman */
-.auth-link::after {
-  content: '';
-  position: absolute;
-  left: 10%;
-  right: 10%;
-  bottom: 6px;
-  height: 2px;
-  background-color: transparent;
-  transition: background-color 0.3s ease;
-}
-
-.auth-link:hover::after {
-  background-color: #27cc0e;
-}
-
-/* Halvány fény-effekt hover-re */
-.auth-link:hover {
-  background-color: #495057;
-  color: #ffffff !important;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
-}
-
-.auth-link.active {
-  border-bottom: 2px solid #27cc0e;
-}
-
-.custom-nav {
-  gap: 1.5rem;
-}
-
-/* Mobil nézetben ne legyen túl nagy a logo */
-@media (max-width: 576px) {
-  .navbar-brand img {
-    width: 150px;
-    height: auto;
-  }
+.service-title:hover {
+  color: #fe0000; 
+  transform: scale(1.1) translateX(18px); 
 }

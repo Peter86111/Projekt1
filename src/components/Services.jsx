@@ -1,85 +1,51 @@
 import React from 'react';
+import AppointmentScheduler from './AppointmentScheduler';
 
 function Services() {
-    return (
-        <div style={styles.wrapper}>
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={styles.videoBackground}
-          >
-            <source
-              src="Ferrari_2160_24fps.mp4"
-              type="video/mp4"
-            />
-            A böngésződ nem támogatja a videót.
-          </video>
-      
-          <div style={styles.overlay}>
-            <h1 style={styles.title}>Szolgáltatásaink</h1>
-            <p>Fedezze fel a MR Q Electronics által kínált professzionális szolgáltatásokat.</p>
-      
-            <div className="row" style={styles.serviceBox}>
-              <div className="col-md-6">
-                <h3 style={styles.title}>🔩 Alkatrészek</h3>
-                <p>Verseny és hobbiautóhoz profi elektronikai alkatrészek.</p>
-              </div>
-      
-              <div className="col-md-6">
-                <h3 style={styles.title}>🔬 Lézertisztítás</h3>
+  return (
+    <div className="position-relative vh-100 overflow-hidden">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="position-absolute top-0 start-0 w-100 h-100 object-fit-cover z-index-0"
+      >
+        <source src="Ferrari_2160_24fps.mp4" type="video/mp4" />
+        A böngésződ nem támogatja a videót.
+      </video>
+
+      <div className="position-relative z-index-1 text-white p-5 bg-dark bg-opacity-50">
+        <h1 className="display-4 mb-4 text-center">Szolgáltatásaink</h1>
+        <p className="lead mb-5 text-center">Fedezze fel a MR Q Electronics által kínált professzionális szolgáltatásokat.</p>
+
+        <div className="row g-4">
+          {/* Bal oldali szöveges tartalom balra igazítva */}
+          <div className="col-md-6 text-start">
+            <div className="card bg-dark text-white shadow-lg">
+              <div className="card-body">
+                <h3 className="fs-5 service-title">Alkatrészek</h3>
+                <p>Verseny és hobbiautóhoz profi elektronikai termékek.</p>
+                <h3 className="fs-5 service-title">Lézertisztítás</h3>
                 <p>A hatékony felületisztításhoz.</p>
-              </div>
-      
-              <div className="col-md-6">
-                <h3 style={styles.title}>📦 Egyedi árajánlat</h3>
+                <p>Ez a precíz eljárás eltávolítja a rozsdát, szennyeződéseket és egyenetlenségeket, biztosítva az optimális tapadást a festék vagy más bevonatok számára.</p>
+                <h3 className="fs-5 service-title">Egyedi árajánlat</h3>
                 <p>Kérje egyedi árajánlatunkat.</p>
               </div>
             </div>
           </div>
+
+          {/* Jobb oldali időpontfoglaló */}
+          <div className="col-md-6">
+            <div className="container p-4 bg-dark bg-opacity-75 rounded-3 shadow-lg">
+              <AppointmentScheduler />
+            </div>
+          </div>
         </div>
-      );
+      </div>
+    </div>
+  );
 }
 
-// Stílusok
-const styles = {
-    wrapper: {
-      position: "relative",
-      height: "100vh",
-      width: "100%",
-      overflow: "hidden",
-    },
-    videoBackground: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      minWidth: "100%",
-      minHeight: "100%",
-      objectFit: "cover",
-      zIndex: 0,
-    },
-    overlay: {
-      position: "relative",
-      zIndex: 1,
-      height: "100%",
-      width: "100%",
-      padding: "60px",
-      backgroundColor: "rgba(0, 0, 0, 0.6)",
-      color: "#fff",
-      textAlign: "center",
-    },
-    title: {
-      fontSize: "26px",
-      marginBottom: "20px",
-    },
-    serviceBox: {
-      marginTop: "30px",
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "center",
-      gap: "30px",
-    },
-  };
-
 export default Services;
+

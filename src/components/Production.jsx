@@ -8,8 +8,7 @@ const ProductBrowser = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [products, setProducts] = useState([]);
-
-  // Inside the component
+  
   const navigate = useNavigate();
 
   // Remove the redundant definition of handleProductClick
@@ -69,7 +68,7 @@ const ProductBrowser = () => {
 
   return (
     <div className="bg-dark">
-      <h1 className="h1-modify bg-dark">Kategóriák</h1>
+      <h2 className=" bg-dark">Kategóriák</h2>
       <select
         className="bg-dark"
         value={selectedCategory}

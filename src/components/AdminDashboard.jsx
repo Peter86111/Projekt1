@@ -3,6 +3,7 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 import AddNewProduct from "./AddNewProduct";
 import UpdateProduct from "./UpdateProduct";
 import DeleteProduct from "./DeleteProduct";
+import BookedAppointments from "./BookedAppointments";
 import { useAuth } from "../context/AuthContext";
 
 export default function AdminDashboard() {
@@ -28,6 +29,9 @@ export default function AdminDashboard() {
           <Link to="/admin/delete" style={styles.navLink}>
             Termék törlése
           </Link>
+          <Link to="/admin/booked-appointments" style={styles.navLink}>  {/* Új link */}
+            Foglalt időpontok
+          </Link>
         </nav>
 
         <div style={styles.content}>
@@ -36,6 +40,7 @@ export default function AdminDashboard() {
             <Route path="create" element={<AddNewProduct />} />
             <Route path="update" element={<UpdateProduct />} />
             <Route path="delete" element={<DeleteProduct />} />
+            <Route path="booked-appointments" element={<BookedAppointments />} />
           </Routes>
         </div>
       </div>
@@ -66,7 +71,7 @@ const styles = {
   container: {
     position: "relative",
     zIndex: 1,
-    maxWidth: "800px",
+    maxWidth: "900px",
     width: "100%",
     backgroundColor: "#1e1e1e", // egyedi sötét háttér csak a dashboard-nak
     borderRadius: "12px",
