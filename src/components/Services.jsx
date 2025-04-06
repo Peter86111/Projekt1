@@ -28,7 +28,7 @@ function Services() {
                 <p>Verseny és hobbiautóhoz profi elektronikai termékek.</p>
                 <h3 className="fs-5 service-title">Lézertisztítás</h3>
                 <p>A hatékony felületisztításhoz.</p>
-                <p>Ez a precíz eljárás eltávolítja a rozsdát, szennyeződéseket és egyenetlenségeket, biztosítva az optimális tapadást a festék vagy más bevonatok számára.</p>
+                <p>Ez a precíz eljárás eltávolítja a rozsdát, szennyeződéseket és festéket, biztosítva az optimális tapadást a festék vagy más bevonatok számára.</p>
                 <h3 className="fs-5 service-title">Egyedi árajánlat</h3>
                 <p>Kérje egyedi árajánlatunkat.</p>
               </div>

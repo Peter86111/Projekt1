@@ -10,22 +10,21 @@ const images = importAll(require.context("../pictures", false, /\.(png|jpe?g|svg
 
 const ImageCarousel = () => {
   return (
-    <div className="carousel-container">
+    <div className="carousel-background">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={10}
+        spaceBetween={0}
         slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
+        navigation={false}
+        pagination={false}
         autoplay={{ delay: 3000 }}
         loop
-        className="swiper-container"
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index} className="swiper-slide">
+          <SwiperSlide key={index}>
             <img
               src={image}
-              alt={`Termék ${index + 1}`}
+              alt={`Háttér ${index + 1}`}
               className="carousel-image"
             />
           </SwiperSlide>
@@ -36,5 +35,6 @@ const ImageCarousel = () => {
 };
 
 export default ImageCarousel;
+
 
 
