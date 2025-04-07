@@ -37,7 +37,7 @@ const ProductSinglePage = () => {
             {isPending || !product ? (
                 // Show loading spinner while fetching data
                 <div className="spinner-border text-light" role="status">
-                    <span className="sr-only">Loading...</span>
+                    <span className="sr-only">Betöltés...</span>
                 </div>
             ) : (
                 <div className="card-body bg-dark text-light rounded mx-auto" style={{ maxWidth: "1400px" }}>
@@ -55,13 +55,13 @@ const ProductSinglePage = () => {
                         {/* Product details */}
                         <div className="col-md-6 d-flex flex-column justify-content-center">
                             <h4 className="card-title text-light mt-2">{product.name}</h4>
-                            <p className="lead text-light">Price: {product.price} Ft</p>
+                            <p className="lead text-light">Összeg: {product.price} Ft</p>
                             <p className="text-light text-start">{product.description}</p>
                             <div className="mt-3">
                                 <button 
                                     className="btn btn-outline-light"
                                     onClick={() => handleAddToCart(product)} >
-                                    Add to Cart
+                                    Kosárba
                                 </button>
                             </div>
                         </div>
@@ -73,7 +73,7 @@ const ProductSinglePage = () => {
                     {/* Back button */}
                     <div className="text-center mt-3">
                         <NavLink to="/termekek" className="btn btn-outline-light">
-                            <i className="bi bi-arrow-left-circle"></i> Back
+                            <i className="bi bi-arrow-left-circle"></i> Vissza
                         </NavLink>
                     </div>
                 </div>
