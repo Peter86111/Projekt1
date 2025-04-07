@@ -46,13 +46,15 @@ const NavbarWithCart = ({ user, isAdmin, timeLeft }) => {
             </Nav.Link>
           )}
 
-          <Nav.Link className="topnav-basket position-relative text-light cart-link" href="/cart">
-            <i className="bi bi-basket-fill fs-5"></i>
-            <span className="ms-1">Kosár</span>
-            {cartItemCount > 0 && (
-              <span className="cart-badge">{cartItemCount}</span>
-            )}
-          </Nav.Link>
+<Nav.Link className="topnav-basket position-relative text-light cart-link" href="/cart">
+  <i className="bi bi-basket-fill fs-5"></i>
+  <span className="ms-1">Kosár</span>
+  {cartItemCount > 0 && (
+    <span className="position-absolute top-0 start-80 translate-middle badge rounded-pill bg-danger">
+      {cartItemCount}
+    </span>
+  )}
+</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
