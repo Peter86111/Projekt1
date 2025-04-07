@@ -6,11 +6,11 @@ export const Registration = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");       // ❌ Hibák
-  const [success, setSuccess] = useState("");   // ✅ Sikeres regisztráció
+  const [error, setError] = useState("");       // Error messages
+  const [success, setSuccess] = useState("");   // Success messages
   const navigate = useNavigate();
 
-  // 🔐 Regisztráció beküldése
+  // Handle registration submission
   const handleLogin = async () => {
     try {
       const valasz = await axios.post("https://localhost:7012/auth/register", {
@@ -25,6 +25,7 @@ export const Registration = () => {
       setError("");
       setSuccess("Sikeres regisztráció! ✅ Email küldése folyamatban...");
 
+      // Redirect to home after short delay
       setTimeout(() => navigate("/"), 2000);
     } catch (error) {
       console.error("Hiba a regisztráció során: ", error);
@@ -39,18 +40,22 @@ export const Registration = () => {
 
   return (
     <div style={styles.wrapper}>
+      {/* Background video */}
       <video autoPlay muted loop playsInline style={styles.videoBackground}>
         <source src="Lamborghini_3840_2160_24fps.mp4" type="video/mp4" />
         A böngésződ nem támogatja a videót.
       </video>
 
+      {/* Form overlay on top of the video */}
       <div style={styles.overlay}>
         <div style={styles.formWrapper}>
           <h1 style={styles.title}>Regisztráció</h1>
 
+          {/* Feedback messages */}
           {success && <p style={styles.success}>{success}</p>}
           {error && <p style={styles.error}>{error}</p>}
 
+          {/* Username input */}
           <div style={styles.inputGroup}>
             <label style={styles.label}>Felhasználónév:</label>
             <input
@@ -61,6 +66,8 @@ export const Registration = () => {
               style={styles.input}
             />
           </div>
+
+          {/* Password input */}
           <div style={styles.inputGroup}>
             <label style={styles.label}>Jelszó:</label>
             <input
@@ -71,6 +78,8 @@ export const Registration = () => {
               style={styles.input}
             />
           </div>
+
+          {/* Email input */}
           <div style={styles.inputGroup}>
             <label style={styles.label}>Email:</label>
             <input
@@ -81,6 +90,8 @@ export const Registration = () => {
               style={styles.input}
             />
           </div>
+
+          {/* Submit button */}
           <button onClick={handleLogin} style={styles.button}>
             Regisztráció
           </button>
@@ -90,7 +101,7 @@ export const Registration = () => {
   );
 };
 
-// 💅 Stílusok
+// Component styles
 const styles = {
   wrapper: {
     position: "relative",

@@ -3,6 +3,7 @@ import React from 'react';
 function AboutUs() {
   return (
     <div style={styles.wrapper}>
+      {/* Background video element */}
       <video
         autoPlay
         muted
@@ -17,6 +18,7 @@ function AboutUs() {
         A böngésződ nem támogatja a videót.
       </video>
   
+      {/* Content overlay displayed over the video */}
       <div style={styles.overlay}>
         <h1 style={styles.title}>Üdvözöljük a MR Q Electronics-nál!</h1>
         <div className="col-md-6">
@@ -44,13 +46,13 @@ function AboutUs() {
   );
 }
 
-// Stílusok
+// Component styles using inline CSS-in-JS syntax
 const styles = {
   wrapper: {
     position: "relative",
     height: "100vh",
     width: "100vw",
-    overflow: "hidden",
+    overflow: "hidden", // Prevent scrollbars
   },
   videoBackground: {
     position: "absolute",
@@ -58,15 +60,15 @@ const styles = {
     left: 0,
     minWidth: "100%",
     minHeight: "100%",
-    objectFit: "cover",
-    zIndex: 0,
+    objectFit: "cover", // Cover the full screen
+    zIndex: 0, // Send behind overlay
   },
   overlay: {
     position: "relative",
-    zIndex: 1,
+    zIndex: 1, // Above the video
     height: "100%",
     width: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
+    backgroundColor: "rgba(0, 0, 0, 0.6)", // Semi-transparent background
     color: "#fff",
     padding: "60px",
     display: "flex",

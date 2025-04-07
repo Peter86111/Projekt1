@@ -68,7 +68,7 @@ const ProductBrowser = () => {
 
   return (
     <div className="bg-dark">
-      <h2 className=" bg-dark">Kategóriák</h2>
+      <h2 className="h2-category">Kategóriák</h2>
       <select
         className="bg-dark"
         value={selectedCategory}

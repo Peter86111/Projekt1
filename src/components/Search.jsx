@@ -6,7 +6,7 @@ const CategoryMenu = () => {
   const [products, setProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  // Kategóriák lekérdezése
+  // Fetch categories when component mounts
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -19,9 +19,9 @@ const CategoryMenu = () => {
     fetchCategories();
   }, []);
 
-  // Kiválasztott kategóriához tartozó termékek lekérdezése
+  // Fetch products based on selected category
   const handleCategoryChange = async (event) => {
-    const categoryId = parseInt(event.target.value, 10);  // Átalakítjuk a szöveget számra
+    const categoryId = parseInt(event.target.value, 10); // Convert string to number
     setSelectedCategory(categoryId);
 
     if (categoryId) {
@@ -32,13 +32,15 @@ const CategoryMenu = () => {
         console.error("Hiba az adatok lekérésekor: ", error);
       }
     } else {
-      setProducts([]); // Ha nincs kiválasztott kategória, üres termékek listája
+      setProducts([]); // Clear products if no category selected
     }
   };
 
   return (
     <div>
       <h1 className="h1-modify">Kategóriák</h1>
+
+      {/* Dropdown to select category */}
       <select
         value={selectedCategory}
         onChange={handleCategoryChange}
@@ -46,18 +48,18 @@ const CategoryMenu = () => {
         <option value="">Válassz...</option>
         {categoriesData.map(category => (
           <option key={category.id} value={category.id}>
-            {category.name} {/* Itt jelenítjük meg a kategória nevét */}
+            {category.name} {/* Display category name */}
           </option>
         ))}
       </select>
 
-      {/* Kiválasztott kategória termékei */}
+      {/* Display products from selected category */}
       <div>
         <h2>Termékek</h2>
         {products.length > 0 ? (
           <ul>
             {products.map(product => (
-              <li key={product.id}>{product.name}</li> // Termékek listázása
+              <li key={product.id}>{product.name}</li>
             ))}
           </ul>
         ) : (

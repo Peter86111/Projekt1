@@ -9,8 +9,9 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { setUser } = useAuth();
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
+  // Handle login button click
   const handleLogin = async () => {
     try {
       const valasz = await axios.post("https://localhost:7012/auth/login", {
@@ -18,12 +19,13 @@ export const Login = () => {
         password,
       });
 
+      // Save token to localStorage
       const token = valasz.data;
       localStorage.setItem("jwt", token.token);
       console.log("Token:", token.token);
       console.log("Üzenet:", token.message);
 
-      // ⬇️ Token dekódolása és user beállítása
+      // Decode JWT token and set user context
       const decoded = jwtDecode(token.token);
 
       setUser({
@@ -32,7 +34,7 @@ export const Login = () => {
       });
 
       setError("");
-      navigate("/termekek");
+      navigate("/termekek"); // Redirect on successful login
     } catch (error) {
       setError("A hitelesítés sikertelen. Ellenőrizd a bejelentkezési adatokat!");
       console.error("Hiba a bejelentkezés során: ", error);
@@ -41,9 +43,19 @@ export const Login = () => {
 
   return (
     <div className="bg-dark" style={styles.container}>
-      <div style={{ backgroundColor: "rgba(0,0,0,0.6)", padding: "40px", borderRadius: "10px" }}>
+      <div
+        style={{
+          backgroundColor: "rgba(0,0,0,0.6)",
+          padding: "40px",
+          borderRadius: "10px",
+        }}
+      >
         <h1 style={styles.title}>Bejelentkezés</h1>
+
+        {/* Error message display */}
         {error && <p style={styles.error}>{error}</p>}
+
+        {/* Username input */}
         <div style={styles.inputGroup}>
           <label style={styles.label}>Felhasználónév:</label>
           <input
@@ -54,6 +66,8 @@ export const Login = () => {
             style={styles.input}
           />
         </div>
+
+        {/* Password input */}
         <div style={styles.inputGroup}>
           <label style={styles.label}>Jelszó:</label>
           <input
@@ -64,6 +78,8 @@ export const Login = () => {
             style={styles.input}
           />
         </div>
+
+        {/* Submit button */}
         <button onClick={handleLogin} style={styles.button}>
           Bejelentkezés
         </button>
@@ -72,7 +88,7 @@ export const Login = () => {
   );
 };
 
-// Stílusok
+// Component styles
 const styles = {
   container: {
     backgroundImage:

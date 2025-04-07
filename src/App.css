@@ -1,172 +1,312 @@
-/* Navbar */
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
-
-.b-example-divider {
-  width: 100%;
-  height: 3rem;
-  background-color: rgba(0, 0, 0, .1);
-  border: solid rgba(0, 0, 0, .15);
-  border-width: 1px 0;
-  box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-}
-
-.b-example-vr {
-  flex-shrink: 0;
-  width: 1.5rem;
-  height: 100vh;
-}
-
-.bi {
-  vertical-align: -.125em;
-  fill: currentColor;
-}
-
-.nav-scroller {
-  position: relative;
-  z-index: 2;
-  height: 2.75rem;
-  overflow-y: hidden;
-}
-
-.nav-scroller .nav {
-  display: flex;
-  flex-wrap: nowrap;
-  padding-bottom: 1rem;
-  margin-top: -1px;
-  overflow-x: auto;
-  text-align: center;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-}
-
-.btn-bd-primary {
-  --bd-violet-bg: #712cf9;
-  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-  --bs-btn-font-weight: 600;
-  --bs-btn-color: var(--bs-white);
-  --bs-btn-bg: var(--bd-violet-bg);
-  --bs-btn-border-color: var(--bd-violet-bg);
-  --bs-btn-hover-color: var(--bs-white);
-  --bs-btn-hover-bg: #6528e0;
-  --bs-btn-hover-border-color: #6528e0;
-  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-  --bs-btn-active-color: var(--bs-btn-hover-color);
-  --bs-btn-active-bg: #5a23c8;
-  --bs-btn-active-border-color: #5a23c8;
-}
-
-.bd-mode-toggle {
-  z-index: 1500;
-}
-
-.bd-mode-toggle .dropdown-menu .active .bi {
-  display: block !important;
-}
-
-.border-line-red {
+/* Cart */
+.btn-custom-red {
   background-color: transparent;
-  border-radius: 10px;
-  border: solid 2px #e91e63;
+  color: #000000;
+  font-size: 12px;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.bg-dark {
+/* red hover button */
+.btn-custom-red:hover {
+  background-color: #fc7b7b;
   color: white;
 }
 
-.h1-admin {
-  font-size: large;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.btn-custom-green {
+  background-color: transparent;
+  color: #000000;
+  font-size: 12px;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.h1-modify {
-  margin-left: 20px;
-  font-size: large;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.img-social-kando{
+  border-radius: 30px;
 }
 
-select {
-  width: 150px;
-  border-radius:20px;
-  text-align: center;
-}
-
-.footer {
-  margin: 0px;
-  padding: 0px;
-}
-
-.row {
-  margin: auto;
-  padding: auto;
-}
-
-.ml-auto {
-  margin-left: auto;
-  margin-right: 20px;
-}
-
-.no-products{
+.h2-category {
   color: white;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  font-style: italic;
 }
 
-.topnav-registration {
-  margin-top: 5px;
-}
-
-.topnav-basket {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.img-products {
-  width: auto;
-  height: auto;
-}
-
-.img-social-kando {
-  border-radius: 50%;
-}
-
-.jog {
+/* green hover button */
+.btn-custom-green:hover {
+  background-color: #7bfc90;
   color: white;
-  text-align: center;
+}
+
+/* Product details */
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 10px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
-* {
-  font-family: "Anta", sans-serif;
+.product-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.product-price {
+  font-size: 0.9rem;
+  color: #555;
+  font-size: 16px;
+  font-weight: bold;
+  color: #d32f2f;
+  margin-top: 10px;
+  display: block;
+}
+
+/* Quantity */
+.quantity-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-left: 0;
+}
+
+.quantity-value {
+  min-width: 35px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Trash button */
+.trash-button {
+  margin-left: auto;
+  padding: 5px 10px;
+}
+
+/* About Us section */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: white;
+}
+
+/* Add to cart button */
+.add-to-cart {
+  background-color: #233242;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s;
+  display: block;
+  margin-left: auto;
+}
+
+.add-to-cart:hover {
+  background-color: #0056b3;
+}
+
+/* Home list hover */
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  text-align: left;
+}
+
+li {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+li:hover {
+  color: #fe0000;
+  cursor: pointer;
+}
+
+/* Swiper arrows */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #8a8380;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #ffffff;
+}
+
+/* Swiper pagination */
+.swiper-pagination-bullet {
+  background-color: #888787;
+  width: 30px;
+  height: 5px;
+  border-radius: 5%;
+  margin: 0 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #130232;
+  transform: scale(1.2);
+}
+
+/* Product cards */
+.card-body,
+.card-footer {
+  background-color: #212529 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.product-card {
+  height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.2s;
+  background-color: #343a40;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-image-container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 5px;
+}
+
+.product-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background-color: #fff;
+}
+
+.product-card .card-body {
+  padding: 1rem;
+  text-align: center;
+}
+
+.product-card h5 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-card p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  color: #ccc;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+}
+
+/* Service title hover effect */
+.service-title {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.service-title:hover {
+  color: #fe0000;
+  transform: scale(1.1) translateX(18px);
+}
+
+/* Carousel background */
+.carousel-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Category Filter - Final Dark Modern Select */
+select {
+  appearance: none;
+  background-color: #2c2c2c;
+  border: 1px solid #444444;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 16px;
+  color: #ffffff; /* WHITE TEXT in the selected option */
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  min-width: 200px;
+
+  background-image: url("data:image/svg+xml,%3Csvg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+}
+
+.admin-select {
+  font-size: 14px;
+  padding: 4px 8px;
+  max-width: 160px;
+  margin-left: 12px;
+  width: auto;
+  border-radius: 4px;
+}
+
+select:hover {
+  border-color: #666666;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+select:focus {
+  border-color: #3399ff;
+  box-shadow: 0 0 0 4px rgba(51, 153, 255, 0.3);
+}
+
+/* Dropdown options – dark background, white text */
+select option {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 /* Footer */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-/* body {
-  line-height: 1.5;
-  font-family: 'Poppins', sans-serif;
-} */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.footer {
+  background-color: #24262b;
+  padding: 70px 0;
+  width: 100%;
+  max-width: 100%;
 }
 
 .footer-container {
@@ -181,15 +321,6 @@ select {
   margin: auto;
 }
 
-ul {
-  list-style: none;
-}
-
-.footer {
-  background-color: #24262b;
-  padding: 70px 0;
-}
-
 .footer-col {
   width: 25%;
   padding: 0 15px;
@@ -200,7 +331,7 @@ ul {
 
 .footer-col h4 {
   font-size: 18px;
-  color: #ffffff;  
+  color: #ffffff;
   margin-bottom: 35px;
   font-weight: 500;
   position: relative;
@@ -226,10 +357,9 @@ ul {
 
 .footer-col ul li a {
   font-size: 16px;
-  color: #ffffff;
+  color: #bbbbbb;
   text-decoration: none;
   font-weight: 300;
-  color: #bbbbbb;
   display: block;
   transition: all 0.3s ease;
   text-align: center;
@@ -262,314 +392,30 @@ ul {
   background-color: #ffffff;
 }
 
-/*Footer responsive*/
-@media(max-width: 767px) {
+/* Footer responsiveness */
+@media (max-width: 767px) {
   .footer-col {
     width: 50%;
     margin-bottom: 30px;
   }
 }
 
-@media(max-width: 574px) {
+@media (max-width: 574px) {
   .footer-col {
     width: 100%;
   }
 }
-.footer {
-  width: 100%;
-  max-width: 100%;
-}
-.footer {
-  width: 100%;
-  max-width: 100%;
-}
-/*Kosár*/
-.btn-custom-red{
-  background-color: transparent; /* Transparent background */
-  color: #000000; /* Text color (can be any color you want) */
-  font-size: 12px; /* Font size */
-  padding: 5px 5px; /* Padding around the text */
-  border:none;
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: all 0.3s ease; /* Smooth transition for hover effect */
+
+/* Global resets & fonts */
+@import url('https://fonts.googleapis.com/css2?family=Anta&display=swap');
+* {
+  font-family: "Anta", sans-serif;
 }
 
-/* gomb hover piros */
-.btn-custom-red:hover {
-  background-color: #fc7b7b; /* Background color on hover */
-  color: white; /* Text color on hover */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-}
-.btn-custom-green{
-  background-color: transparent; /* Transparent background */
-  color: #000000; /* Text color (can be any color you want) */
-  font-size: 12px; /* Font size */
-  padding: 5px 5px; /* Padding around the text */
-  border:none;
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: all 0.3s ease; /* Smooth transition for hover effect */
-}
-
-/* gomb hover zöld */
-.btn-custom-green:hover {
-  background-color: #7bfc90; /* Background color on hover */
-  color: white; /* Text color on hover */
-}
-.box {
-  display: flex;
-  align-items:normal;
-  justify-content: space-between; /* Elemek közötti egyenlő távolság */
-  padding: 10px;
-  border: 1px solid #989393;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  gap: 20px; /* Távolság az elemek között */
-}
-
-/* Bal oldal: Terméknév és ár */
-.product-info {
-  display: flex;           /* Vízszintes elrendezés */
-  align-items: center;     /* Középre igazítja a terméket és az árat */
-  gap: 10px;               /* Kisebb távolság a név és az ár között */
-}
-
-.product-name {
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.product-price {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-/* Középen: Mennyiség */
-.quantity-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-left: 0;   /* Nincs eltolás, hogy középen maradjon */
-}
-
-.quantity-value {
-  min-width: 35px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-/* Jobb oldal: Kuka gomb */
-.trash-button {
-  margin-left: auto;
-  padding: 5px 10px;
-}
-/*színek: #27cc0e zöld, #fe0000 piros */
-
-/* About us */
-.container {
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  color: white;
-}
-
-.title {
-  font-size: 24px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.section-container {
-  display: flex;
-  flex-direction:inherit;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 1000px;
-  margin-top: 20px;
-}
-
-.section {
-  flex: 2;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(183, 50, 50, 0.5);
-  margin: 10px;
-  color: black;
-}
-
-.product-info {
-  padding: 10px;
-}
-
-.product-name {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.product-description {
-  font-size: 14px;
-  color: #666;
-}
-
-.product-price {
-  font-size: 16px;
-  font-weight: bold;
-  color: #d32f2f;
-  margin-top: 10px;
-  display: block;
-}
-/*kosrába gomb*/
-.add-to-cart {
-    background-color: #233242;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background 0.3s;
-  display: block;
-  margin-left: auto; /* Jobbra igazítás */
-}
-
-.add-to-cart:hover {
-  background-color: #0056b3;
-}
-
-/* home lista hover*/
-ul {
-  list-style-type: none; /* Töröljük a lista pontokat */
-  padding-left: 0; /* Eltávolítjuk a bal oldali behúzást */
-  text-align: left; /* A lista balra igazítása */
-}
-
-li {
-  font-size: 18px; /* A listaelemek betűmérete */
-  margin-bottom: 10px; /* Az egyes listaelemek közötti távolság */
-  color: #fff; /* A szöveg színe */
-}
-
-li:hover {
-  color: #fe0000; /* Szöveg színének változtatása hover állapotban */
-  cursor: pointer; /* A kurzor változása pointerre */
-}
-.swiper-button-next,
-.swiper-button-prev {
-  color: #8a8380; /* Az alap szín */
-}
-
-/* Hover állapot: amikor az egér a nyilak fölé kerül */
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  color: #ffffff; /* A színváltozás hover hatására */
-}
-/* Az összes pötty alap stílusa */
-.swiper-pagination-bullet {
-  background-color: #888787; /* Szürke szín */
-  width: 30px; /* Pöttyök szélessége */
-  height: 5px; /* Pöttyök magassága */
-  border-radius: 5%; /* Lekerekített sarkok */
-  margin: 0 5px; /* Távolság a pöttyök között */
-  transition: background-color 0.3s, transform 0.3s; /* Animáció */
-}
-
-/* Az aktív (kiemelt) pötty */
-.swiper-pagination-bullet-active {
-  background-color:#130232; /* Aktív pötty színe */
-  transform: scale(1.2); /* Aktív pötty nagyobb méretben */
-}
-
-.card-body, .card-footer {
-  background-color: #212529 !important; /* Bootstrap sötét háttér */
-  color: white !important;
-  border: none !important;
-}
-
-.product-card {
-  height: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  border-radius: 8px;
-  transition: transform 0.2s;
-  background-color: #343a40;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.product-image-container {
-  width: 100%;
-  height: 200px; /* Egységes magasság */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff; /* háttér a kisebb képekhez */
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  padding: 5px; /* kis tér a kép körül */
-}
-
-.product-image-container img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-.product-card img {
-  width: 100%;
-  height: auto; /* Automatikus magasság a képhez */
-  object-fit: contain;
-  background-color: #fff;
-}
-
-.product-card .card-body {
-  padding: 1rem;
-  text-align: center;
-}
-
-.product-card h5 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.product-card p {
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  color: #ccc;
-}
-
-.product-card:hover {
-  transform: scale(1.02);
-}
-/* Hover effektus a címekhez */
-.service-title {
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.service-title:hover {
-  color: #fe0000; 
-  transform: scale(1.1) translateX(18px); 
-}
-
-.carousel-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-.carousel-image {
-  width: 100%;
-  height: 100vh;
-  object-fit:cover;
-  object-position: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

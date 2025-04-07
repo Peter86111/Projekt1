@@ -6,11 +6,13 @@ function DeleteProduct() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
+  // Fetch products and categories on initial load
   useEffect(() => {
     fetchProducts();
     fetchCategories();
   }, []);
 
+  // Fetch products based on category (or all if no category is selected)
   const fetchProducts = async (categoryId) => {
     try {
       const url = categoryId
@@ -24,6 +26,7 @@ function DeleteProduct() {
     }
   };
 
+  // Fetch all categories for the filter dropdown
   const fetchCategories = async () => {
     try {
       const response = await axios.get("https://localhost:7012/api/Categories");
@@ -33,21 +36,23 @@ function DeleteProduct() {
     }
   };
 
+  // Handle category filter change
   const handleCategoryFilterChange = async (e) => {
     const categoryId = e.target.value;
     setSelectedCategory(categoryId);
   
     if (categoryId === "") {
-      await fetchProducts();
+      await fetchProducts(); // Load all products
     } else {
-      await fetchProducts(Number(categoryId));
+      await fetchProducts(Number(categoryId)); // Load by selected category
     }
   };
 
+  // Delete a product by ID
   const handleDelete = async (id) => {
     try {
       await axios.delete(`https://localhost:7012/api/Products?id=${id}`);
-      fetchProducts(selectedCategory);
+      fetchProducts(selectedCategory); // Refresh product list after deletion
     } catch (error) {
       console.error("Hiba a termék törlésekor:", error);
     }
@@ -55,9 +60,10 @@ function DeleteProduct() {
 
   return (
     <div style={styles.mainContainer}>
+      {/* Category filter dropdown */}
       <div style={styles.filterContainer}>
         <label>Kategória szűrő: </label>
-        <select value={selectedCategory} onChange={handleCategoryFilterChange}>
+        <select className="admin-select" value={selectedCategory} onChange={handleCategoryFilterChange}>
           <option value="">(Mindegyik)</option>
           {categories.map((c) => (
             <option key={c.id} value={c.id}>
@@ -67,6 +73,7 @@ function DeleteProduct() {
         </select>
       </div>
 
+      {/* Product cards */}
       <div style={styles.cardList}>
         {products.map((p) => (
           <div key={p.id} style={styles.card}>
@@ -75,7 +82,9 @@ function DeleteProduct() {
               <h3>{p.name}</h3>
               <p>{p.description}</p>
               <p>{p.price} Ft</p>
-              <button style={styles.deleteButton} onClick={() => handleDelete(p.id)}>Törlés</button>
+              <button style={styles.deleteButton} onClick={() => handleDelete(p.id)}>
+                Törlés
+              </button>
             </div>
           </div>
         ))}
@@ -84,18 +93,18 @@ function DeleteProduct() {
   );
 }
 
-// Stílusok
+// Component styles
 const styles = {
   mainContainer: {
     padding: "20px",
     backgroundColor: "#222",
     color: "#fff",
     height: "80vh",
-    overflow: "auto", // hogy görgethető legyen, ha túl magas
+    overflow: "auto", // allow scrolling if content exceeds height
   },
   filterContainer: {
     marginBottom: "20px",
-  },  
+  },
   cardList: {
     display: "flex",
     flexWrap: "wrap",

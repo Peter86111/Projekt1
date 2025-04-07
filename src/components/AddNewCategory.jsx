@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-//import UpdateCategory from './UpdateCategory'
 
 function AddNewCategory(props) {
+  // Initialize local state to store form data
   const [categoryData, setCategorydata] = useState({
     categoryname: "",
     categoryId: "",
   });
 
+  // Populate form if editing an existing category
   useEffect(() => {
     if (props.categoryObj) {
       setCategorydata({
@@ -14,13 +15,15 @@ function AddNewCategory(props) {
         categoryId: props.productObj.categoryId || ''
       });
     }
-  }, [props.categoryObj]); 
+  }, [props.categoryObj]);
 
+  // Handle changes in input fields
   const handleChange = (event) => {
     const { name, value } = event.target;
     setCategorydata({ ...categoryData, [name]: value });
   };
 
+  // Submit the form data to the backend API
   const handleSubmit = async (event) => {
     const url = `https://localhost:7012/Categories`;
     event.preventDefault();
@@ -34,19 +37,22 @@ function AddNewCategory(props) {
     });
 
     if (!request.ok) {
-      console.log("Hiba");
+      console.log("Hiba"); // Error occurred during request
       return;
     }
 
     const response = await request.json();
-    props.handleCount();
+    props.handleCount(); // Trigger parent callback (e.g. refresh list)
     console.log(response.message);
   };
 
   return (
     <div>
+      {/* Form header */}
       <h1 className='h1-admin'><label>Új kategória felvétele:</label></h1>
-      <form onSubmit={handleSubmit} className=''>
+
+      {/* Category form */}
+      <form onSubmit={handleSubmit}>
         <label>Kategória neve:</label>
         <input
           type='text'
@@ -57,6 +63,7 @@ function AddNewCategory(props) {
           className='form-control'
           placeholder='Kategória neve'
         />
+
         <label>Kategória ID:</label>
         <input
           type='number'
@@ -67,7 +74,11 @@ function AddNewCategory(props) {
           className='form-control'
           placeholder='Termék kategória ID'
         />
-        <button type='submit' className='btn btn-success'><i class="bi bi-floppy-fill"></i></button>
+
+        {/* Submit button */}
+        <button type='submit' className='btn btn-success'>
+          <i className="bi bi-floppy-fill"></i>
+        </button>
       </form>
     </div>
   );

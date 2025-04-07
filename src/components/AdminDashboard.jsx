@@ -9,16 +9,21 @@ import { useAuth } from "../context/AuthContext";
 export default function AdminDashboard() {
   const { isAdmin } = useAuth();
 
+  // If the user is not an admin, redirect to home
   if (!isAdmin) {
     return <Navigate to="/" replace />;
   }
 
   return (
     <div style={styles.background}>
+      {/* Visual overlay background effects */}
       <div style={styles.overlay}></div>
+
+      {/* Main admin dashboard container */}
       <div style={styles.container}>
         <h2 style={styles.title}>Admin Dashboard</h2>
 
+        {/* Navigation links for admin actions */}
         <nav style={styles.nav}>
           <Link to="/admin/create" style={styles.navLink}>
             Új termék felvétele
@@ -29,11 +34,12 @@ export default function AdminDashboard() {
           <Link to="/admin/delete" style={styles.navLink}>
             Termék törlése
           </Link>
-          <Link to="/admin/booked-appointments" style={styles.navLink}>  {/* Új link */}
+          <Link to="/admin/booked-appointments" style={styles.navLink}>
             Foglalt időpontok
           </Link>
         </nav>
 
+        {/* Routing for different admin sections */}
         <div style={styles.content}>
           <Routes>
             <Route path="" element={<p style={styles.placeholder}>Kérlek válassz az Admin menüből!</p>} />
@@ -48,12 +54,12 @@ export default function AdminDashboard() {
   );
 }
 
-// 💅 Modern sötét háttér, világos kártya, háttér effekt
+// Styling for dark admin dashboard layout
 const styles = {
   background: {
     position: "relative",
     minHeight: "100vh",
-    backgroundColor: "#121212", // főoldal háttér
+    backgroundColor: "#121212", // full background color
     overflow: "hidden",
     display: "flex",
     alignItems: "center",
@@ -73,7 +79,7 @@ const styles = {
     zIndex: 1,
     maxWidth: "900px",
     width: "100%",
-    backgroundColor: "#1e1e1e", // egyedi sötét háttér csak a dashboard-nak
+    backgroundColor: "#1e1e1e", // dark content box
     borderRadius: "12px",
     padding: "30px",
     boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function AddNewProduct(props) {
+  // Initial state for the product form
   const [productData, setProductData] = useState({
     name: "",
     price: "",
@@ -10,10 +11,12 @@ function AddNewProduct(props) {
     picture: "",
   });
 
+  // Feedback messages and form errors
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errors, setErrors] = useState({});
 
+  // Populate form if editing an existing product
   useEffect(() => {
     if (props.productObj) {
       setProductData({
@@ -26,6 +29,7 @@ function AddNewProduct(props) {
     }
   }, [props.productObj]);
 
+  // Handle input changes and reset errors
   const handleChange = (event) => {
     const { name, value } = event.target;
     setProductData((prev) => ({
@@ -33,13 +37,14 @@ function AddNewProduct(props) {
       [name]: name === "categoryId" ? Number(value) : value,
     }));
 
-    // Hibát eltávolítjuk ha újra írja a mezőt
+    // Clear error when the user starts editing
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
     }));
   };
 
+  // Validate input before submitting
   const validate = () => {
     const newErrors = {};
     if (!productData.name) newErrors.name = "Név kötelező";
@@ -52,9 +57,11 @@ function AddNewProduct(props) {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Submit product to backend API
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // If validation fails, show error and stop submission
     if (!validate()) {
       setErrorMessage("Kérlek töltsd ki a mezőket helyesen.");
       setSuccessMessage("");
@@ -70,6 +77,7 @@ function AddNewProduct(props) {
         },
       });
 
+      // Handle successful submission
       if (response.status === 201) {
         props.handleCount?.();
         setSuccessMessage("Sikeresen mentve ✅");
@@ -97,9 +105,11 @@ function AddNewProduct(props) {
     <div style={styles.container}>
       <h1 style={styles.title}>Új termék felvétele</h1>
 
+      {/* Feedback messages */}
       {successMessage && <p style={{ color: "limegreen" }}>{successMessage}</p>}
       {errorMessage && <p style={{ color: "crimson" }}>{errorMessage}</p>}
 
+      {/* Product form */}
       <form onSubmit={handleSubmit}>
         {renderInput("name", "Termék neve:", "text", productData.name, errors, handleChange)}
         {renderInput("price", "Ár:", "number", productData.price, errors, handleChange)}
@@ -115,7 +125,7 @@ function AddNewProduct(props) {
   );
 }
 
-// 🧩 Új segédfüggvény: input render + hiba
+// 🧩 Helper function to render input field with error display
 function renderInput(name, label, type, value, errors, handleChange) {
   return (
     <div style={styles.inputGroup}>
@@ -138,6 +148,7 @@ function renderInput(name, label, type, value, errors, handleChange) {
   );
 }
 
+// Inline style definitions
 const styles = {
   container: {
     maxWidth: "600px",

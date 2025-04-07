@@ -16,17 +16,18 @@ function UpdateProduct() {
     picture: "",
   });
 
-  // ✨ Hibakezelés & visszajelzés
+  // Feedback handling
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [editErrors, setEditErrors] = useState({});
 
+  // Initial fetch of products and categories
   useEffect(() => {
     fetchProducts();
     fetchCategories();
   }, []);
 
-  // 🔄 Termékek lekérdezése (opcionálisan kategória alapján)
+  // Fetch products, optionally by category
   const fetchProducts = async (categoryId) => {
     try {
       const url = categoryId
@@ -40,7 +41,7 @@ function UpdateProduct() {
     }
   };
 
-  // 🔄 Kategóriák lekérdezése
+  // Fetch all product categories
   const fetchCategories = async () => {
     try {
       const catRes = await axios.get("https://localhost:7012/api/Categories");
@@ -50,6 +51,7 @@ function UpdateProduct() {
     }
   };
 
+  // Handle category filter dropdown change
   const handleCategoryFilterChange = async (e) => {
     const categoryId = e.target.value;
     setSelectedCategory(categoryId);
@@ -61,6 +63,7 @@ function UpdateProduct() {
     }
   };
 
+  // Open form for editing a specific product
   const handleEditClick = (product) => {
     setEditProductId(product.id);
     setEditData({ ...product });
@@ -69,6 +72,7 @@ function UpdateProduct() {
     setEditErrors({});
   };
 
+  // Update field value during edit
   const handleEditChange = (e) => {
     const { name, value } = e.target;
     setEditData((prev) => ({
@@ -76,14 +80,14 @@ function UpdateProduct() {
       [name]: name === "price" || name === "categoryId" ? Number(value) : value,
     }));
 
-    // ✅ Az adott mező hibáját töröljük, ha elkezdik írni
+    // Clear error for current field
     setEditErrors((prev) => ({
       ...prev,
       [name]: "",
     }));
   };
 
-  // 🧠 Validáció mentés előtt
+  // Validate before saving changes
   const validateEditData = () => {
     const newErrors = {};
     if (!editData.name) newErrors.name = "Név kötelező";
@@ -91,10 +95,12 @@ function UpdateProduct() {
     if (!editData.description) newErrors.description = "Leírás kötelező";
     if (!editData.picture) newErrors.picture = "Kép URL kötelező";
     if (!editData.categoryId || editData.categoryId < 1) newErrors.categoryId = "Érvényes kategória ID kell";
+
     setEditErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // Send PUT request to save changes
   const handleSave = async () => {
     if (!validateEditData()) {
       setErrorMessage("Kérlek javítsd a hibás mezőket.");
@@ -125,6 +131,7 @@ function UpdateProduct() {
     }
   };
 
+  // Cancel editing mode
   const handleCancel = () => {
     setEditProductId(null);
     setSuccessMessage("");
@@ -132,7 +139,7 @@ function UpdateProduct() {
     setEditErrors({});
   };
 
-  // 👇 Külön input render hibakezeléssel
+  // Render input field with validation styles
   const renderEditInput = (name, label, value, errors, onChange, type = "text") => (
     <div style={{ marginBottom: "10px" }}>
       <input
@@ -156,9 +163,10 @@ function UpdateProduct() {
 
   return (
     <div style={styles.mainContainer}>
+      {/* Category filter dropdown */}
       <div style={styles.filterContainer}>
         <label>Kategória szűrő: </label>
-        <select value={selectedCategory} onChange={handleCategoryFilterChange}>
+        <select className="admin-select" value={selectedCategory} onChange={handleCategoryFilterChange}>
           <option value="">(Mindegyik)</option>
           {categories.map((c) => (
             <option key={c.id} value={c.id}>
@@ -168,6 +176,7 @@ function UpdateProduct() {
         </select>
       </div>
 
+      {/* Product cards */}
       <div style={styles.cardList}>
         {products.map((p) => (
           <div key={p.id} style={styles.card}>
@@ -175,11 +184,11 @@ function UpdateProduct() {
 
             {editProductId === p.id ? (
               <div style={styles.cardBody}>
-                {/* ✅ Üzenetek */}
+                {/* Feedback messages */}
                 {successMessage && <p style={{ color: "limegreen" }}>{successMessage}</p>}
                 {errorMessage && <p style={{ color: "crimson" }}>{errorMessage}</p>}
 
-                {/* 🔧 Mezők szerkesztése */}
+                {/* Editable input fields */}
                 {renderEditInput("name", "Név", editData.name, editErrors, handleEditChange)}
                 {renderEditInput("price", "Ár", editData.price, editErrors, handleEditChange, "number")}
                 {renderEditInput("description", "Leírás", editData.description, editErrors, handleEditChange)}
@@ -204,7 +213,7 @@ function UpdateProduct() {
   );
 }
 
-// 🎨 Stílusok
+// Component styles
 const styles = {
   mainContainer: {
     padding: "20px",

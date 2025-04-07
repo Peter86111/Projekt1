@@ -14,12 +14,13 @@ export const AuthProvider = ({ children }) => {
   const [timeLeft, setTimeLeft] = useState(300); // 5 perc = 300 másodperc
   const isAdmin = user?.role === "Admin";
 
+  // Logout function: clears user and token
   const logout = useCallback(() => {
     setUser(null);
     localStorage.removeItem("jwt");
   }, []);
 
-  // ⏱️ Token betöltés + visszaszámlálás indítása
+  // Load token from localStorage and start countdown
   useEffect(() => {
     const storedToken = localStorage.getItem("jwt");
 
@@ -45,11 +46,10 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // ⏲️ Inaktivitás figyelés és visszaszámlálás
+  // Start countdown timer and logout if time runs out
   useEffect(() => {
     if (!user) return;
 
-    // Timer minden másodpercben csökkent
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -63,12 +63,12 @@ export const AuthProvider = ({ children }) => {
     return () => clearInterval(timer);
   }, [user, logout]);
 
-  // 👆 Egérmozgás esetén újraindítjuk a számlálót
+  // Reset countdown on mouse move or key press
   useEffect(() => {
     if (!user) return;
 
     const resetTimer = () => {
-      setTimeLeft(300);
+      setTimeLeft(300); // reset to full session time
     };
 
     window.addEventListener("mousemove", resetTimer);
@@ -87,4 +87,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// Custom hook to access auth context
 export const useAuth = () => useContext(AuthContext);

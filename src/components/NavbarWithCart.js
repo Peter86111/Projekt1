@@ -17,7 +17,7 @@ const NavbarWithCart = ({ user, isAdmin, timeLeft }) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="w-100 d-flex flex-column flex-lg-row justify-content-between align-items-start align-items-lg-center">
 
-        {/* KÖZÉPSŐ MENÜ – középre igazítva nagy kijelzőn */}
+        {/* CENTER MENU – Centered on large screens */}
         <Nav className="w-100 justify-content-center flex-wrap gap-3 custom-nav my-3 my-lg-0">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/termekek">Termékek</Nav.Link>
@@ -26,12 +26,13 @@ const NavbarWithCart = ({ user, isAdmin, timeLeft }) => {
           {isAdmin && <Nav.Link href="/admin">Admin</Nav.Link>}
         </Nav>
 
-        {/* JOBB OLDAL */}
+        {/* RIGHT SIDE */}
         <Nav className="d-flex flex-column flex-lg-row align-items-center text-center gap-3">
           {!user && <Nav.Link href="/registration" className="auth-link">Regisztráció</Nav.Link>}
           {!user && <Nav.Link href="/login" className="auth-link">Bejelentkezés</Nav.Link>}
           {user && <Nav.Link href="/logout" className="auth-link">Kijelentkezés</Nav.Link>}
 
+          {/* User welcome and role display */}
           {user && (
             <Nav.Link disabled className="text-light user-info">
               Üdv, {jwtDecode(localStorage.getItem("jwt")).name}<br />
@@ -39,6 +40,7 @@ const NavbarWithCart = ({ user, isAdmin, timeLeft }) => {
             </Nav.Link>
           )}
 
+          {/* Token expiration countdown */}
           {user && (
             <Nav.Link disabled className="text-warning small">
               ⏳ {Math.floor(timeLeft / 60)}:
@@ -46,15 +48,16 @@ const NavbarWithCart = ({ user, isAdmin, timeLeft }) => {
             </Nav.Link>
           )}
 
-<Nav.Link className="topnav-basket position-relative text-light cart-link" href="/cart">
-  <i className="bi bi-basket-fill fs-5"></i>
-  <span className="ms-1">Kosár</span>
-  {cartItemCount > 0 && (
-    <span className="position-absolute top-0 start-80 translate-middle badge rounded-pill bg-danger">
-      {cartItemCount}
-    </span>
-  )}
-</Nav.Link>
+          {/* Cart icon with item count badge */}
+          <Nav.Link className="topnav-basket position-relative text-light cart-link" href="/cart">
+            <i className="bi bi-basket-fill fs-5"></i>
+            <span className="ms-1">Kosár</span>
+            {cartItemCount > 0 && (
+              <span className="position-absolute top-0 start-80 translate-middle badge rounded-pill bg-danger">
+                {cartItemCount}
+              </span>
+            )}
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

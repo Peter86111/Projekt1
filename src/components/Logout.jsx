@@ -7,15 +7,15 @@ const Logout = () => {
   const { setUser } = useAuth();
 
   useEffect(() => {
-    // Token törlése és user állapot visszaállítása
+    // Remove JWT token and reset user state
     localStorage.removeItem("jwt");
     setUser(null);
 
-    // Átirányítás pl. főoldalra vagy loginre
+    // Redirect to login or home page
     navigate("/login");
   }, [setUser, navigate]);
 
-  return null; // Nem kell semmit megjelenítenünk
+  return null; // No UI is needed for this component
 };
 
 export default Logout;
