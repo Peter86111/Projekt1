@@ -31,8 +31,21 @@
   border-radius: 30px;
 }
 
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #212529;
+}
+
+main.main-content {
+  flex: 1;
+}
+
 .h2-category {
   color: white;
+  margin-left: 20px;
 }
 
 /* green hover button */
@@ -168,7 +181,9 @@ li:hover {
 
 .product-card {
   height: 100%;
-  max-width: 100%;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
   overflow: hidden;
   border-radius: 8px;
   transition: transform 0.2s;
@@ -299,6 +314,20 @@ select option {
   padding: 10px;
   font-size: 16px;
   font-weight: 500;
+}
+
+.category-select {
+  font-size: 14px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  max-width: 180px;
+  margin-left: 20px;
+  margin-right: auto;
+  margin-bottom: 30px;
+  display: block;
+  background-color: #2c2c2c;
+  border: 1px solid #444;
+  color: white;
 }
 
 /* Footer */

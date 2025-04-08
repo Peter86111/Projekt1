@@ -25,6 +25,19 @@ const ProductSinglePage = () => {
         })();
     }, [id]);
 
+    // Fix: Scroll to top after the product is fully loaded
+    useEffect(() => {
+        if (!isPending && product) {
+            // Delay to ensure DOM has fully rendered
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }, 100); // Adjust delay if needed
+        }
+    }, [isPending, product]);
+
     // Handle adding the current product to the cart
     const handleAddToCart = () => {
         if (product) {
@@ -55,7 +68,7 @@ const ProductSinglePage = () => {
                         {/* Product details */}
                         <div className="col-md-6 d-flex flex-column justify-content-center">
                             <h4 className="card-title text-light mt-2">{product.name}</h4>
-                            <p className="lead text-light">Összeg: {product.price} Ft</p>
+                            <p className="lead text-light">Ár: {product.price} Ft</p>
                             <p className="text-light text-start">{product.description}</p>
                             <div className="mt-3">
                                 <button 

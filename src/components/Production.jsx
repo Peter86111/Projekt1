@@ -70,7 +70,7 @@ const ProductBrowser = () => {
     <div className="bg-dark">
       <h2 className="h2-category">Kategóriák</h2>
       <select
-        className="bg-dark"
+        className="category-select bg-dark"
         value={selectedCategory}
         onChange={(e) => handleCategoryChange(e.target.value)}
       >
@@ -82,7 +82,7 @@ const ProductBrowser = () => {
         ))}
       </select>
 
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 bg-dark">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 bg-dark justify-content-center">
         {products.map((product) => (
           <div className="col" key={product.id}>
             <div className="card product-card">
